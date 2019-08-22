@@ -1,0 +1,18 @@
+.nav-container {
+  position: relative;
+  display: flex;
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .top-gradient {
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  }
+  .bottom-gradient {
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  }
+}

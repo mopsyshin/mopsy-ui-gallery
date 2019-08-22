@@ -1,0 +1,48 @@
+@import '../assets/variables.scss';
+
+.App {
+  .main-container {
+    display: flex;
+    width: 1024px;
+    height: 100vh;
+    min-height: 900px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .left-side {
+    width: 250px;
+    text-align: right;
+    .title {
+      font-size: 48px;
+      letter-spacing: -1px;
+      font-weight: 600;
+      color: $nsd70;
+    }
+  }
+  .frame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 431px;
+    height: 865px;
+    margin-right: 64px;
+    .img-frame {
+      width: 100%;
+      position: absolute;
+    }
+    .inner-frame {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 375px;
+      height: 814px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
