@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Pages.scss';
-import config from '../components/ui.config';
+import config from 'components/ui.config';
+import Toast from 'components/toast/Toast';
 
 const UiPage = props => {
 
@@ -9,11 +10,13 @@ const UiPage = props => {
       return index == 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '').replace('-', '');
   }
+
   const UiName = config[camelize(props.match.params.name)].comp
 
   return (
     <div>
-      <UiName />
+      <UiName/>
+      <Toast/>
     </div>
   )
 }

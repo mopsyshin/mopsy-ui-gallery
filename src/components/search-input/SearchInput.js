@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import IcRemove from "../../assets/IcRemove";
-import './SearchInput.scss';
+import React, { useState, useContext } from "react";
+import IcRemove from "assets/IcRemove";
+import "./SearchInput.scss";
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
+import { CommonContext } from 'stores/CommonContext';
 
 const SearchInput = props => {
+  const [state, actions] = useContext(CommonContext);
+
   const [inputIsActive, setInputIsActive] = useState(false);
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
   const [inputValue, setInputValue] = useState("");
@@ -17,7 +21,15 @@ const SearchInput = props => {
   };
 
   const submit = () => {
-    props.submit(inputValue);
+    if (!inputIsEmpty) {
+      actions.addToast(`Searching '${inputValue}'... `)
+    }
+  };
+
+  const enterSubmit = e => {
+    if (e.keyCode === 13) {
+      submit();
+    }
   }
 
   const renderSubmitButton = () => {
@@ -30,12 +42,13 @@ const SearchInput = props => {
     }
   };
 
-  const renderRemoveButton = () => {
+  const renderClearButton = () => {
     if (!inputIsEmpty) {
       return (
         <button
+          className="btn-clear"
           onClick={() => {
-            updateInputValue({ target: { value: '' } });
+            updateInputValue({ target: { value: "" } });
           }}
         >
           <IcRemove color="#ffffff" />
@@ -45,10 +58,26 @@ const SearchInput = props => {
   };
 
   return (
-    <div>
-      searchInput
-    </div>
-  )
-}
+    <TransitionWrapper title="Smooth Search Input">
+      <div className="search-input-container">
+        <div
+          className={`input-wrapper ${
+            inputIsActive || !inputIsEmpty ? "active" : ""
+          }`}
+        >
+          <input
+            type="text"
+            value={inputValue}
+            onChange={updateInputValue}
+            onKeyUp={enterSubmit}
+            onFocus={() => {setInputIsActive(true)}}
+            onBlur={() => {setInputIsActive(false)}}/>
+          {renderClearButton()}
+        </div>
+        {renderSubmitButton()}
+      </div>  
+    </TransitionWrapper>
+  );
+};
 
 export default SearchInput;

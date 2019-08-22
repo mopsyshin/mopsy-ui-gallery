@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './Dropdown.scss';
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper'
 
 const Dropdown = props => {
 
   return (
-    <div>
+    <TransitionWrapper title="Dropdown Menu">
       dropdown
-    </div>
+    </TransitionWrapper>
   )
 }
 

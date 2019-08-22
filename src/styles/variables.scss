@@ -12,3 +12,12 @@ $nsd10: rgba(0,0,0,0.1);
 $nsd08: rgba(0,0,0,0.08);
 $nsd04: rgba(0,0,0,0.04);
 $nsd02: rgba(0,0,0,0.02);
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,26 @@
+.transition-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  height: 814px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  opacity: 0;
+  &.active {
+    transition: all 0.5s;
+    opacity: 1;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .title {
+    position: absolute;
+    top: 56px;
+    left: 24px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+}

@@ -1,4 +1,4 @@
-@import '../assets/variables.scss';
+@import '../styles/variables.scss';
 
 .App {
   .main-container {
@@ -31,18 +31,7 @@
     .img-frame {
       width: 100%;
       position: absolute;
-    }
-    .inner-frame {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 375px;
-      height: 814px;
-      overflow-x: hidden;
-      overflow-y: scroll;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+      z-index: -1;
     }
   }
 }

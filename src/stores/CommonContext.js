@@ -4,16 +4,22 @@ const CommonContext = createContext([{}, () => {}]);
 
 const CommonProvider = props => {
   const [state, setState] = useState({
-    user: {
-      name: 'mopsy',
-      age: 13,
-    }
+    toast: [],
   });
 
   const actions = {
-    updateUser: user => {
-      setState({...state, user});
-    }
+    addToast: toastMessage => {
+      const newArr = state.toast.slice();
+      newArr.push(toastMessage);
+      setState({...state, toast: newArr});
+      setTimeout(() => {
+        actions.removeToast();
+      }, 1000);
+    },
+    removeToast: index => {
+      const newArr = state.toast.slice(1);
+      setState({...state, toast: newArr});
+    },
   };
 
   return (
