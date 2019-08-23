@@ -9,9 +9,9 @@
   overflow-x: hidden;
   overflow-y: scroll;
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(32px);
   &.active {
-    transition: all 0.8s;
+    transition: all 0.6s;
     opacity: 1;
     transform: translateX(0px);
   }

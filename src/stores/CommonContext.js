@@ -5,7 +5,7 @@ const CommonContext = createContext([{}, () => {}]);
 const CommonProvider = props => {
   const [state, setState] = useState({
     toast: [],
-    logs: ['Action Log Display Mounted'],
+    logs: ['[Action Log] Action Log Display Mounted'],
   });
 
   const actions = {
@@ -19,7 +19,7 @@ const CommonProvider = props => {
           ],
           logs: [
             ...state.logs,
-            `Add Toast ${toastItem.message}`
+            `[Toast : addToast] "${toastItem.message}"`
           ]
         });
       } else {
@@ -30,7 +30,7 @@ const CommonProvider = props => {
           ],
           logs: [
             ...state.logs,
-            `Add Toast ${toastItem.message}`
+            `[Toast : addToast] "${toastItem.message}"`
           ]
         });
       }
@@ -39,7 +39,7 @@ const CommonProvider = props => {
       setState({...state, logs: [...state.logs, log]});
     },
     clearLog: () => {
-      setState({...state, logs: ['Clear Logs']});
+      setState({...state, logs: ['[Action Log] Clear Logs']});
     }
   };
 
