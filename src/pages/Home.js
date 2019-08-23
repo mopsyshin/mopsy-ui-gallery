@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Pages.scss';
+import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 
 const Home = props => {
 
   return (
-    <div>
+    <TransitionWrapper title="Mopsy UI Gallery">
       Home
-    </div>
+    </TransitionWrapper>
   )
 }
 

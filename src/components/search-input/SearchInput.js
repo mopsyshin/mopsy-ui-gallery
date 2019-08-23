@@ -6,11 +6,11 @@ import { CommonContext } from 'stores/CommonContext';
 
 const SearchInput = props => {
   const [state, actions] = useContext(CommonContext);
-
   const [inputIsActive, setInputIsActive] = useState(false);
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
   const [inputValue, setInputValue] = useState("");
-  
+  const [count, setCount] = useState(1);
+
   const updateInputValue = e => {
     setInputValue(e.target.value);
     if (e.target.value === "") {
@@ -20,14 +20,23 @@ const SearchInput = props => {
     }
   };
 
+  const clearInputValue = () => {
+    actions.addLog('Clear Search Input');
+    updateInputValue({target: {value: ''}});
+  }
+
   const submit = () => {
     if (!inputIsEmpty) {
-      actions.addToast(`Searching '${inputValue}'... `)
+      actions.addToast({
+        id: count,
+        message: `Searching '${inputValue}'...`,
+      })
+      setCount(count + 1);
     }
   };
 
   const enterSubmit = e => {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       submit();
     }
   }
@@ -36,7 +45,7 @@ const SearchInput = props => {
     if (inputIsActive || !inputIsEmpty) {
       return (
         <button disabled={inputIsEmpty} onClick={submit} className="btn-submit">
-          검색
+          Search
         </button>
       );
     }
@@ -48,9 +57,8 @@ const SearchInput = props => {
         <button
           className="btn-clear"
           onClick={() => {
-            updateInputValue({ target: { value: "" } });
-          }}
-        >
+            clearInputValue();
+          }}>
           <IcRemove color="#ffffff" />
         </button>
       );
@@ -69,13 +77,14 @@ const SearchInput = props => {
             type="text"
             value={inputValue}
             onChange={updateInputValue}
-            onKeyUp={enterSubmit}
+            onKeyPress={enterSubmit}
+            placeholder="Type Something"
             onFocus={() => {setInputIsActive(true)}}
             onBlur={() => {setInputIsActive(false)}}/>
           {renderClearButton()}
         </div>
         {renderSubmitButton()}
-      </div>  
+      </div>
     </TransitionWrapper>
   );
 };

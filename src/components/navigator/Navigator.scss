@@ -1,18 +1,63 @@
+@import 'styles/variables.scss';
+
 .nav-container {
   position: relative;
   display: flex;
-  height: 400px;
+  height: 380px;
+  margin-top: 24px;
   flex-direction: column;
   justify-content: center;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  &::-webkit-scrollbar {
-    display: none;
+  .nav-list {
+    height: 380px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .blank-item {
+    height: 100px;
+    width: 100%;
+  }
+  .nav-item {
+    margin-right: 16px;
+    position: relative;
+    display: flex;
+    height: 42px;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 20px;
+    color: $nd60;
+    transition: all 0.3s;
+    &.active {
+      font-weight: 800;
+      color: $nd80;
+      &::after {
+        position: absolute;
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: $nd80;
+        border-radius: 6px;
+        transform: translate(12px, -1px);
+        animation: fadeIn 0.3s both;
+      }
+    }
   }
   .top-gradient {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    width: 100%;
+    height: 100px;
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
   }
   .bottom-gradient {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
   }
 }

@@ -5,21 +5,42 @@ const CommonContext = createContext([{}, () => {}]);
 const CommonProvider = props => {
   const [state, setState] = useState({
     toast: [],
+    logs: ['Action Log Display Mounted'],
   });
 
   const actions = {
-    addToast: toastMessage => {
-      const newArr = state.toast.slice();
-      newArr.push(toastMessage);
-      setState({...state, toast: newArr});
-      setTimeout(() => {
-        actions.removeToast();
-      }, 1000);
+    addToast: toastItem => {
+      if (state.toast.length > 3) {
+        setState({
+          ...state,
+          toast: [
+            ...state.toast.slice(1),
+            toastItem,
+          ],
+          logs: [
+            ...state.logs,
+            `Add Toast ${toastItem.message}`
+          ]
+        });
+      } else {
+        setState({...state,
+          toast: [
+            ...state.toast,
+            toastItem,
+          ],
+          logs: [
+            ...state.logs,
+            `Add Toast ${toastItem.message}`
+          ]
+        });
+      }
     },
-    removeToast: index => {
-      const newArr = state.toast.slice(1);
-      setState({...state, toast: newArr});
+    addLog: log => {
+      setState({...state, logs: [...state.logs, log]});
     },
+    clearLog: () => {
+      setState({...state, logs: ['Clear Logs']});
+    }
   };
 
   return (

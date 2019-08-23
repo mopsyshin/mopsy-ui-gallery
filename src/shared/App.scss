@@ -1,33 +1,40 @@
-@import '../styles/variables.scss';
+@import 'styles/variables.scss';
 
 .App {
   .main-container {
     display: flex;
-    width: 1024px;
+    width: 100%;
+    max-width: 1440px;
     height: 100vh;
     min-height: 900px;
     margin: 0 auto;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
   }
   .left-side {
-    width: 250px;
+    min-width: 250px;
     text-align: right;
     .title {
-      font-size: 48px;
+      font-size: 52px;
       letter-spacing: -1px;
       font-weight: 600;
-      color: $nsd70;
+      color: $nd80;
+      margin-right: 16px;
+    }
+    .author {
+      color: $nd60;
+      margin-top: 4px;
+      margin-right: 18px;
     }
   }
-  .frame {
+  .frame-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 431px;
+    min-width: 431px;
     height: 865px;
-    margin-right: 64px;
+    margin: 0 80px;
     .img-frame {
       width: 100%;
       position: absolute;
