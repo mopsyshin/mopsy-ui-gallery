@@ -21,7 +21,7 @@ const SearchInput = props => {
   };
 
   const clearInputValue = () => {
-    actions.addLog('Clear Search Input');
+    actions.addLog('[Search Input : Clear] Clear Search Input');
     updateInputValue({target: {value: ''}});
   }
 
@@ -29,7 +29,7 @@ const SearchInput = props => {
     if (!inputIsEmpty) {
       actions.addToast({
         id: count,
-        message: `Searching '${inputValue}'...`,
+        message: `[Search Input : Search] ${inputValue}`,
       })
       setCount(count + 1);
     }
@@ -79,8 +79,14 @@ const SearchInput = props => {
             onChange={updateInputValue}
             onKeyPress={enterSubmit}
             placeholder="Type Something"
-            onFocus={() => {setInputIsActive(true)}}
-            onBlur={() => {setInputIsActive(false)}}/>
+            onFocus={() => {
+              setInputIsActive(true)
+              actions.addLog('[Search Input : Focus] true')
+            }}
+            onBlur={() => {
+              setInputIsActive(false)
+              actions.addLog('[Search Input : Blur] true')
+            }}/>
           {renderClearButton()}
         </div>
         {renderSubmitButton()}

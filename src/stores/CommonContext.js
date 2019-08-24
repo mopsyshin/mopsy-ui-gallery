@@ -19,18 +19,19 @@ const CommonProvider = props => {
           ],
           logs: [
             ...state.logs,
-            `[Toast : addToast] "${toastItem.message}"`
+            `[Toast : addToast] ${toastItem.message}`
           ]
         });
       } else {
-        setState({...state,
+        setState({
+          ...state,
           toast: [
             ...state.toast,
             toastItem,
           ],
           logs: [
             ...state.logs,
-            `[Toast : addToast] "${toastItem.message}"`
+            `[Toast : addToast] ${toastItem.message}`
           ]
         });
       }

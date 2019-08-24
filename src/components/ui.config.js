@@ -1,5 +1,5 @@
-import SearchInput from './search-input/SearchInput';
-import Dropdown from './dropdown/Dropdown';
+import SearchInput from './ui/search-input/SearchInput';
+import Dropdown from './ui/dropdown/Dropdown';
 
 export default {
   searchInput: {
@@ -23,8 +23,8 @@ export default {
     comp: Dropdown,
   },
   tabMenu: {
-    name: 'Tab Menu',
-    path: 'search-input',
+    name: 'Simple Tab',
+    path: 'simple-tab',
     comp: SearchInput,
   },
   infiniteScroll: {
