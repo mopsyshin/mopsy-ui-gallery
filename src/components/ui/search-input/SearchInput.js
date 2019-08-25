@@ -27,10 +27,11 @@ const SearchInput = props => {
 
   const submit = () => {
     if (!inputIsEmpty) {
+      store.addLog(`[Search Input : Search] ${inputValue}`);
       store.addToast({
         id: count,
-        message: `[Search Input : Search] ${inputValue}`,
-      })
+        message: `Searching ${inputValue}...`,
+      });
       setCount(count + 1);
     }
   };
