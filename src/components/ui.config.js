@@ -31,7 +31,7 @@ export default {
   },
   infiniteScrollView: {
     name: 'Infinite Scroll View',
-    path: 'infinite-scrollView',
+    path: 'infinite-scroll-view',
     comp: InfiniteScrollView,
   },
   gorgeousPost: {

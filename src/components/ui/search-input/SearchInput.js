@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { observer } from 'mobx-react-lite';
 import { UiContext } from 'stores';
 import "./SearchInput.scss";
-import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 import IcRemove from "assets/IcRemove";
 
 const SearchInput = props => {
@@ -67,32 +66,30 @@ const SearchInput = props => {
   };
 
   return (
-    <TransitionWrapper title="Smooth Search Input">
-      <div className="search-input-container">
-        <div
-          className={`input-wrapper ${
-            inputIsActive || !inputIsEmpty ? "active" : ""
-          }`}
-        >
-          <input
-            type="text"
-            value={inputValue}
-            onChange={updateInputValue}
-            onKeyPress={enterSubmit}
-            placeholder="Type Something"
-            onFocus={() => {
-              setInputIsActive(true)
-              store.addLog('[Search Input : Focus] true')
-            }}
-            onBlur={() => {
-              setInputIsActive(false)
-              store.addLog('[Search Input : Blur] true')
-            }}/>
-          {renderClearButton()}
-        </div>
-        {renderSubmitButton()}
+    <div className="search-input-container">
+      <div
+        className={`input-wrapper ${
+          inputIsActive || !inputIsEmpty ? "active" : ""
+        }`}
+      >
+        <input
+          type="text"
+          value={inputValue}
+          onChange={updateInputValue}
+          onKeyPress={enterSubmit}
+          placeholder="Type Something"
+          onFocus={() => {
+            setInputIsActive(true)
+            store.addLog('[Search Input : Focus] true')
+          }}
+          onBlur={() => {
+            setInputIsActive(false)
+            store.addLog('[Search Input : Blur] true')
+          }}/>
+        {renderClearButton()}
       </div>
-    </TransitionWrapper>
+      {renderSubmitButton()}
+    </div>
   );
 };
 

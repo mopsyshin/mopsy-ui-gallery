@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { UiContext } from 'stores';
 import './Dropdown.scss';
-import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 import IcArrow from 'assets/IcArrow';
 import data from './sample';
 
@@ -23,12 +22,12 @@ const Dropdown = props => {
     }
   }
 
-  const selectItem = item => {
+  const selectItem = useCallback(item => {
     document.body.style.overflow = 'unset';
     setSelecting(false);
     setSelectedItem(item);
     store.addLog(`[Dropdown Menu : Select Item] ${item.value}, ${item.display}`);
-  }
+  }, [store])
 
   const setBodyOverflow = status => {
     if (status) {
@@ -42,7 +41,7 @@ const Dropdown = props => {
     if (data.initItem) {
       selectItem(data.initItem);
     }
-  }, []);
+  }, [selectItem]);
 
   const wrapperHeight = () => {
     if (selecting) {
@@ -74,23 +73,21 @@ const Dropdown = props => {
   }
 
   return (
-    <TransitionWrapper title="Dropdown Menu">
-      <div className="dropdown-container">
-        <div className={`wrapper ${selecting ? 'selecting' : ''}`} style={{
-          height: wrapperHeight()
-        }}>
-          <div className="display-item" onClick={toggleDropdown}>
-            <div>
-              {selectedItem.display}
-            </div>
-            <div className={`ic-wrapper ${selecting ? 'selecting' : ''}`}>
-              <IcArrow/>
-            </div>
+    <div className="dropdown-container">
+      <div className={`wrapper ${selecting ? 'selecting' : ''}`} style={{
+        height: wrapperHeight()
+      }}>
+        <div className="display-item" onClick={toggleDropdown}>
+          <div>
+            {selectedItem.display}
           </div>
-          { dropdownList() }
+          <div className={`ic-wrapper ${selecting ? 'selecting' : ''}`}>
+            <IcArrow/>
+          </div>
         </div>
+        { dropdownList() }
       </div>
-    </TransitionWrapper>
+    </div>
   )
 }
 

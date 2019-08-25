@@ -15,17 +15,19 @@
     &::-webkit-scrollbar {
       display: none;
     }
+    &:focus {
+      outline: none;
+    }
   }
   .blank-item {
     height: 190px;
     width: 100%;
   }
   .nav-item {
-    padding-right: 32px;
     position: relative;
     display: flex;
     height: 42px;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     background-color: transparent;
     border-radius: 24px;
@@ -35,8 +37,7 @@
       background-color: $nd04;
     }
     .text-wrapper {
-      width: 100%;
-      font-size: 20px;
+      font-size: 22px;
       color: $nd60;
       transition: all 0.3s;
       &:hover {
@@ -45,7 +46,6 @@
       &.active {
         font-weight: 800;
         color: $nd80;
-        transform: scale(1.2) translateX(-20px);
       }
     }
   }
@@ -61,21 +61,5 @@
     &.hidden {
       opacity: 0;
     }
-  }
-  .top-gradient {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  }
-  .bottom-gradient {
-    position: absolute;
-    z-index: 10;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
   }
 }

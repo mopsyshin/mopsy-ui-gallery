@@ -30,7 +30,7 @@ const ToastItem = props => {
     setTimeout(() => {
       store.removeFirstToast();
     }, 1500);
-  }, [])
+  }, [store])
 
   return (
     <div className={`toast-item ${hidden ? 'hidden' : ''}`}>

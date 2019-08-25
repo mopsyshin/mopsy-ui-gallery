@@ -1,33 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import "./Navigator.scss";
 import config from "components/ui.config";
 import { UiContext } from 'stores';
 
 const Navigator = props => {
   const store = useContext(UiContext);
+  const navArr = Object.entries(config);
   const [bounceState, setBounceState] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(Math.round(navArr.length / 2));
   const [isUi, setIsUi] = useState(false);
   
-  const navArr = Object.entries(config);
   let navList;
   let bounceTimer;
   let timer = 0;
 
+  const setNavOffset = useCallback(path => {
+    const target = document.querySelector(`#${path}`);
+    const list = document.querySelector('#nav-list');
+    if (list) {
+      list.scrollTop = target.offsetTop + 21 - 190;
+    }
+  }, []);
+
   useEffect(() => {
-    setIsUi(false);
-    navList.scrollTop = 21;
+    navList.addEventListener("wheel", e => {
+      e.preventDefault();
+    }, {passive: false});
+    navList.addEventListener("keydown", e => {
+      e.preventDefault();
+    });
+    const pathname = props.location.pathname.split('/');
+    if (pathname[1] !== 'ui') {
+      setNavOffset(navArr[currentIndex][1].path);
+      setIsUi(false);
+      return;
+    }
     navArr.forEach((item, index) => {
       if (`/ui/${item[1].path}` === props.location.pathname) {
         setNavOffset(item[1].path);
+        setCurrentIndex(index);
         setIsUi(true);
       }
-    })
-    navList.addEventListener("wheel", e => {
-      e.preventDefault();
     });
-  }, [props.location.pathname]);
-
+  }, [props.location.pathname, navList, navArr, currentIndex, setNavOffset]);
 
   const selectItem = index => {
     const path = navArr[index][1].path;
@@ -38,23 +53,20 @@ const Navigator = props => {
     store.addLog(`[Navigator : Move to] ${path}`);
   }
 
-  const setNavOffset = path => {
-    const target = document.querySelector(`#${path}`);
-    navList.scrollTop = target.offsetTop + 21 - 190;
-  }
+  
 
-  const onWheel = e => {
+  const debounce = (e, callback, delay) => {
     if (!bounceState) {
-      debounceWheel(e);
+      callback(e);
       setBounceState(true);
     } else {
       if (timer === 0) {
         bounceTimer = setInterval(() => {
           timer += 1;
         }, 1);
-      } else if (timer > 50) {
+      } else if (timer > delay) {
         clearInterval(bounceTimer);
-        debounceWheel(e);
+        callback(e);
         setBounceState(false);
         timer = 0;
       }
@@ -62,17 +74,42 @@ const Navigator = props => {
     return;
   };
 
+  const onKeyDown = e => {
+    switch (e.keyCode) {
+      case 40 :
+        selectNextItem();
+        break;
+      case 38 :
+        selectPrevItem();
+        break;
+      default:
+        return;
+    }
+  }
+
+  const onWheel = e => {
+    debounce(e, debounceWheel, 50);
+  }
+
   const debounceWheel = e => {
     if (e.deltaY >= 0) {
-      if (currentIndex < navArr.length - 1) {
-        selectItem(currentIndex + 1)
-      }
+      selectNextItem();
     } else {
-      if (currentIndex > 0) {
-        selectItem(currentIndex - 1)
-      }
+      selectPrevItem();
     }
   };
+
+  const selectNextItem = () => {
+    if (currentIndex < navArr.length - 1) {
+      selectItem(currentIndex + 1)
+    }
+  }
+
+  const selectPrevItem = () => {
+    if (currentIndex > 0) {
+      selectItem(currentIndex - 1)
+    }
+  }
 
   const renderNav = () => {
     return navArr.map(([key, value], index) => {
@@ -81,6 +118,7 @@ const Navigator = props => {
           key={key}
           index={index}
           value={value}
+          currentIndex={currentIndex}
           isActive={props.location.pathname === `/ui/${value.path}`}
           location={props.location}
           onClick={selectItem}
@@ -91,9 +129,7 @@ const Navigator = props => {
 
   return (
     <div className="nav-container">
-      <div className="top-gradient"></div>
-      <div className="bottom-gradient"></div>
-      <div className="nav-list" onWheel={onWheel} ref={ref => (navList = ref)}>
+      <div className="nav-list" id="nav-list" tabIndex="0" onKeyDown={onKeyDown} onWheel={onWheel} ref={ref => (navList = ref)}>
         <div className={`center-point ${isUi ? '' : 'hidden'}`}></div>
         <div className="blank-item"></div>
         {renderNav()}
@@ -110,6 +146,10 @@ const NavItem = props => {
   const clickItem = () => {
     props.onClick(props.index);
   };
+  
+  const distance = Math.abs(props.currentIndex - props.index);
+  const scale = 1 - (distance / 10);
+  const opacity = 1 - (distance / 5);
 
   return (
     <div
@@ -117,7 +157,8 @@ const NavItem = props => {
       onClick={clickItem}
       id={props.value.path}
     >
-      <div className={`text-wrapper ${props.isActive ? "active" : ""}`}>
+      <div className={`text-wrapper ${props.isActive ? "active" : ""}`}
+           style={{transform: `scale(${scale})`, opacity: opacity}}>
         <span>{props.value.name}</span>
       </div>
     </div>

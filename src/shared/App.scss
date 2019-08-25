@@ -13,18 +13,17 @@
   }
   .left-side {
     min-width: 280px;
-    text-align: right;
+    text-align: center;
     .title {
-      font-size: 52px;
+      font-size: 64px;
       letter-spacing: -1px;
       font-weight: 600;
       color: $nd80;
-      margin-right: 24px;
     }
     .author {
       color: $nd60;
       margin-top: 4px;
-      margin-right: 26px;
+      margin-bottom: 48px;
     }
   }
   .frame-container {
