@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import IcRemove from "assets/IcRemove";
+import { observer } from 'mobx-react-lite';
+import { UiContext } from 'stores';
 import "./SearchInput.scss";
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
-import { CommonContext } from 'stores/CommonContext';
+import IcRemove from "assets/IcRemove";
 
 const SearchInput = props => {
-  const [state, actions] = useContext(CommonContext);
+  const store = useContext(UiContext);
   const [inputIsActive, setInputIsActive] = useState(false);
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
   const [inputValue, setInputValue] = useState("");
@@ -21,13 +22,13 @@ const SearchInput = props => {
   };
 
   const clearInputValue = () => {
-    actions.addLog('[Search Input : Clear] Clear Search Input');
+    store.addLog('[Search Input : Clear] Clear Search Input');
     updateInputValue({target: {value: ''}});
   }
 
   const submit = () => {
     if (!inputIsEmpty) {
-      actions.addToast({
+      store.addToast({
         id: count,
         message: `[Search Input : Search] ${inputValue}`,
       })
@@ -81,11 +82,11 @@ const SearchInput = props => {
             placeholder="Type Something"
             onFocus={() => {
               setInputIsActive(true)
-              actions.addLog('[Search Input : Focus] true')
+              store.addLog('[Search Input : Focus] true')
             }}
             onBlur={() => {
               setInputIsActive(false)
-              actions.addLog('[Search Input : Blur] true')
+              store.addLog('[Search Input : Blur] true')
             }}/>
           {renderClearButton()}
         </div>
@@ -95,4 +96,4 @@ const SearchInput = props => {
   );
 };
 
-export default SearchInput;
+export default observer(SearchInput);

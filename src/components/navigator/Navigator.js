@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navigator.scss';
 import config from 'components/ui.config';
-import { CommonContext } from 'stores/CommonContext';
 
 const Navigator = props => {
   const renderNav = () => {
@@ -29,7 +28,6 @@ const Navigator = props => {
 
 const NavItem = props => {
   const [isActive, setIsActive] = useState(false);
-  const [state, actions] = useContext(CommonContext);
 
   useEffect(() => {
     if (props.location.pathname === `/ui/${props.value.path}`) {

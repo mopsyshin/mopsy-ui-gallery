@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { CommonProvider } from 'stores/CommonContext';
 import './App.scss';
 import Navigator from 'components/navigator/Navigator';
 import ActionLog from 'components/action-log/ActionLog';
@@ -9,15 +8,13 @@ import { Home, Intro, UiPage } from 'pages/index';
 
 const App = props => {
   return (
-    <CommonProvider>
-      <div className="App">
-        <div className="main-container">
-          <LeftSide/>
-          <Frame/>
-          <ActionLog/>
-        </div>
+    <div className="App">
+      <div className="main-container">
+        <LeftSide/>
+        <Frame/>
+        <ActionLog/>
       </div>
-    </CommonProvider>
+    </div>
   );
 }
 

@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import { CommonContext } from 'stores/CommonContext';
+import { observer } from 'mobx-react-lite';
+import { UiContext } from 'stores';
 import './ActionLog.scss';
 
 const ActionLog = props => {
-  const [state, actions] = useContext(CommonContext);
+  const store = useContext(UiContext);
 
   const renderLogs = () => {
-    return state.logs.map((log, index) => {
+    return store.logs.map((log, index) => {
       return (
         <div className="log-item" key={index}>
           <span className="num">[{index}] </span>
@@ -19,12 +20,12 @@ const ActionLog = props => {
   let display;
 
   const clearLog = () => {
-    actions.clearLog();
+    store.clearLog();
   }
 
   useEffect(() => {
     display.scrollTop = display.scrollHeight;
-  }, [state.logs])
+  }, [store.logs])
 
   return (
     <div className="action-log-container">
@@ -38,4 +39,4 @@ const ActionLog = props => {
   )
 }
 
-export default ActionLog;
+export default observer(ActionLog);

@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import './Toast.scss';
-import { CommonContext } from 'stores/CommonContext';
+import { UiContext } from 'stores';
 
 const Toast = props => {
-  const [state, actions] = useContext(CommonContext);
+  const store = useContext(UiContext);
 
   const renderToastItem = () => {
-    return state.toast.map(item => {
+    return store.toast.map(item => {
       return <ToastItem item={item} key={item.id}/>
     })
   }
@@ -38,4 +39,4 @@ const ToastItem = props => {
   )
 }
 
-export default Toast;
+export default observer(Toast);

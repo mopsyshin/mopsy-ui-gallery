@@ -1,5 +1,7 @@
 import SearchInput from './ui/search-input/SearchInput';
 import Dropdown from './ui/dropdown/Dropdown';
+import Calendar from './ui/calendar/Calendar';
+import SimpleTab from './ui/simple-tab/SimpleTab';
 
 export default {
   searchInput: {
@@ -12,20 +14,15 @@ export default {
     path: 'dropdown',
     comp: Dropdown,
   },
-  validatedInput: {
-    name: 'Validated Input',
-    path: 'search-input',
-    comp: SearchInput,
-  },
   calendar: {
     name: 'Calendar',
-    path: 'dropdown',
-    comp: Dropdown,
+    path: 'calendar',
+    comp: Calendar,
   },
-  tabMenu: {
+  simpleTab: {
     name: 'Simple Tab',
     path: 'simple-tab',
-    comp: SearchInput,
+    comp: SimpleTab,
   },
   infiniteScroll: {
     name: 'Infinite Scroll View',

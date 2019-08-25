@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { UiContext } from 'stores';
 import './Dropdown.scss';
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 import IcArrow from 'assets/IcArrow';
 import data from './sample';
-import { CommonContext } from 'stores/CommonContext';
+
 
 const Dropdown = props => {
-  const [state, actions] = useContext(CommonContext);
+  const store = useContext(UiContext);
 
   const [selecting, setSelecting] = useState(false);
   const [selectedItem, setSelectedItem] = useState(data.arr[0]);
@@ -14,10 +16,10 @@ const Dropdown = props => {
   const toggleDropdown = () => {
     if (selecting) {
       setSelecting(false);
-      actions.addLog(`[Dropdown Menu : Toggle Dropdown] false`);
+      store.addLog(`[Dropdown Menu : Toggle Dropdown] false`);
     } else {
       setSelecting(true);
-      actions.addLog(`[Dropdown Menu : Toggle Dropdown] true`);
+      store.addLog(`[Dropdown Menu : Toggle Dropdown] true`);
     }
   }
 
@@ -25,7 +27,7 @@ const Dropdown = props => {
     document.body.style.overflow = 'unset';
     setSelecting(false);
     setSelectedItem(item);
-    actions.addLog(`[Dropdown Menu : Select Item] ${item.value}, ${item.display}`);
+    store.addLog(`[Dropdown Menu : Select Item] ${item.value}, ${item.display}`);
   }
 
   const setBodyOverflow = status => {
@@ -34,6 +36,19 @@ const Dropdown = props => {
     } else {
       document.body.style.overflow = 'hidden';
     }
+  }
+
+  useEffect(() => {
+    if (data.initItem) {
+      selectItem(data.initItem);
+    }
+  }, []);
+
+  const wrapperHeight = () => {
+    if (selecting) {
+      return data.arr.length > 5 ? (56 * 5 + 28) + 'px' : (56 * (data.arr.length + 1)) + 'px';
+    }
+    return '56px';
   }
 
   const dropdownList = () => {
@@ -58,19 +73,6 @@ const Dropdown = props => {
     }
   }
 
-  useEffect(() => {
-    if (data.initItem) {
-      selectItem(data.initItem);
-    }
-  }, []);
-
-  const wrapperHeight = () => {
-    if (selecting) {
-      return data.arr.length > 5 ? (56 * 5 + 28) + 'px' : (56 * (data.arr.length + 1)) + 'px';
-    }
-    return '56px';
-  }
-
   return (
     <TransitionWrapper title="Dropdown Menu">
       <div className="dropdown-container">
@@ -92,4 +94,4 @@ const Dropdown = props => {
   )
 }
 
-export default Dropdown;
+export default observer(Dropdown);
