@@ -11,37 +11,55 @@
     height: 380px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     &::-webkit-scrollbar {
       display: none;
     }
   }
   .blank-item {
-    height: 100px;
+    height: 190px;
     width: 100%;
   }
   .nav-item {
-    margin-right: 16px;
+    padding-right: 32px;
     position: relative;
     display: flex;
     height: 42px;
     justify-content: flex-end;
     align-items: center;
-    font-size: 20px;
-    color: $nd60;
+    background-color: transparent;
+    border-radius: 24px;
+    cursor: pointer;
     transition: all 0.3s;
-    &.active {
-      font-weight: 800;
-      color: $nd80;
-      &::after {
-        position: absolute;
-        content: '';
-        width: 6px;
-        height: 6px;
-        background-color: $nd80;
-        border-radius: 6px;
-        transform: translate(12px, -1px);
-        animation: fadeIn 0.3s both;
+    &:hover {
+      background-color: $nd04;
+    }
+    .text-wrapper {
+      width: 100%;
+      font-size: 20px;
+      color: $nd60;
+      transition: all 0.3s;
+      &:hover {
+        color: $nd70;
       }
+      &.active {
+        font-weight: 800;
+        color: $nd80;
+        transform: scale(1.2) translateX(-20px);
+      }
+    }
+  }
+  .center-point {
+    position: absolute;
+    right: 16px;
+    top: calc(50% - 4px);
+    width: 6px;
+    height: 6px;
+    background-color: $nd80;
+    border-radius: 6px;
+    transition: all 0.3s;
+    &.hidden {
+      opacity: 0;
     }
   }
   .top-gradient {

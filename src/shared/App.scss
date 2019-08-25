@@ -12,19 +12,19 @@
     align-items: center;
   }
   .left-side {
-    min-width: 250px;
+    min-width: 280px;
     text-align: right;
     .title {
       font-size: 52px;
       letter-spacing: -1px;
       font-weight: 600;
       color: $nd80;
-      margin-right: 16px;
+      margin-right: 24px;
     }
     .author {
       color: $nd60;
       margin-top: 4px;
-      margin-right: 18px;
+      margin-right: 26px;
     }
   }
   .frame-container {

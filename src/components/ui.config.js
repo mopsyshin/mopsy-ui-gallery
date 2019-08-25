@@ -2,6 +2,11 @@ import SearchInput from './ui/search-input/SearchInput';
 import Dropdown from './ui/dropdown/Dropdown';
 import Calendar from './ui/calendar/Calendar';
 import SimpleTab from './ui/simple-tab/SimpleTab';
+import InfiniteScrollView from './ui/infinite-scroll-view/InfiniteScrollView';
+import GorgeousPost from './ui/gorgeous-post/GorgeousPost';
+import ScrollBanner from './ui/scroll-banner/ScrollBanner';
+import ToggleInput from './ui/toggle-input/ToggleInput';
+import FloatingMenu from './ui/floating-menu/FloatingMenu';
 
 export default {
   searchInput: {
@@ -24,29 +29,29 @@ export default {
     path: 'simple-tab',
     comp: SimpleTab,
   },
-  infiniteScroll: {
+  infiniteScrollView: {
     name: 'Infinite Scroll View',
-    path: 'dropdown',
-    comp: Dropdown,
+    path: 'infinite-scrollView',
+    comp: InfiniteScrollView,
   },
   gorgeousPost: {
     name: 'Gorgeous Post',
-    path: 'search-input',
-    comp: SearchInput,
+    path: 'gorgeous-post',
+    comp: GorgeousPost,
   },
   scrollBanner: {
     name: 'Scroll Banner',
-    path: 'dropdown',
-    comp: Dropdown,
+    path: 'scroll-banner',
+    comp: ScrollBanner,
   },
   toggleInput: {
     name: 'Toggle Input',
-    path: 'search-input',
-    comp: SearchInput,
+    path: 'toggle-input',
+    comp: ToggleInput,
   },
   floatingMenu: {
     name: 'floatingMenu',
-    path: 'dropdown',
-    comp: Dropdown,
+    path: 'floating-menu',
+    comp: FloatingMenu,
   }
 }

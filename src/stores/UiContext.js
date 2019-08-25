@@ -11,11 +11,13 @@ class UiStore {
 	
   @action 
   addToast(toastItem) {
-    if (this.toast.length > 3) {
-      this.toast.slice(1); 
-    }
     this.toast.push(toastItem);
     this.addLog(`[Toast : addToast] ${toastItem.message}`);
+  }
+
+  @action
+  removeFirstToast() {
+    this.toast = this.toast.slice(1);
   }
 
   @action

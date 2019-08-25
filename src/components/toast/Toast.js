@@ -20,20 +20,20 @@ const Toast = props => {
 }
 
 const ToastItem = props => {
+  const store = useContext(UiContext);
   const [hidden, setHidden] = useState(false);
-  const [unMount, setUnMount] = useState(false);
   
   useEffect(() => {
     setTimeout(() => {
       setHidden(true);
     }, 1000);
     setTimeout(() => {
-      setUnMount(true);
+      store.removeFirstToast();
     }, 1500);
   }, [])
 
   return (
-    <div className={`toast-item ${hidden ? 'hidden' : ''} ${unMount ? 'unmount' : ''}`}>
+    <div className={`toast-item ${hidden ? 'hidden' : ''}`}>
       {props.item.message}
     </div>
   )

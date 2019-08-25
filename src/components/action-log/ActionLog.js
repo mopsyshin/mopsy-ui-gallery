@@ -5,17 +5,7 @@ import './ActionLog.scss';
 
 const ActionLog = props => {
   const store = useContext(UiContext);
-
-  const renderLogs = () => {
-    return store.logs.map((log, index) => {
-      return (
-        <div className="log-item" key={index}>
-          <span className="num">[{index}] </span>
-          {log}
-        </div>
-      )
-    })
-  }
+  const logs = store.logs;
 
   let display;
 
@@ -25,7 +15,18 @@ const ActionLog = props => {
 
   useEffect(() => {
     display.scrollTop = display.scrollHeight;
-  }, [store.logs])
+  });
+
+  const renderLogs = () => {
+    return logs.map((log, index) => {
+      return (
+        <div className="log-item" key={index}>
+          <span className="num">[{index}] </span>
+          {log}
+        </div>
+      )
+    })
+  }
 
   return (
     <div className="action-log-container">
