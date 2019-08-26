@@ -53,21 +53,24 @@ const Navigator = props => {
     store.addLog(`[Navigator : Move to] ${path}`);
   }
 
-  
-
   const debounce = (e, callback, delay) => {
     if (!bounceState) {
+      console.log('a');
       callback(e);
       setBounceState(true);
     } else {
       if (timer === 0) {
+        console.log('b');
         bounceTimer = setInterval(() => {
           timer += 1;
         }, 1);
       } else if (timer > delay) {
+        console.log('c');
         clearInterval(bounceTimer);
         callback(e);
-        setBounceState(false);
+        setTimeout(() => {
+          setBounceState(false);
+        }, 500);
         timer = 0;
       }
     }
@@ -92,6 +95,8 @@ const Navigator = props => {
   }
 
   const debounceWheel = e => {
+    console.log('bounce', e.target);
+    console.log('bounce', e.deltaY);
     if (e.deltaY >= 0) {
       selectNextItem();
     } else {
