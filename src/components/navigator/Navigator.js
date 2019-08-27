@@ -55,17 +55,14 @@ const Navigator = props => {
 
   const debounce = (e, callback, delay) => {
     if (!bounceState) {
-      console.log('a');
       callback(e);
       setBounceState(true);
     } else {
       if (timer === 0) {
-        console.log('b');
         bounceTimer = setInterval(() => {
           timer += 1;
         }, 1);
       } else if (timer > delay) {
-        console.log('c');
         clearInterval(bounceTimer);
         callback(e);
         setTimeout(() => {
@@ -91,18 +88,14 @@ const Navigator = props => {
   }
 
   const onWheel = e => {
-    debounce(e, debounceWheel, 50);
+    debounce(e, event => {
+      if (event.deltaY >= 0) {
+        selectNextItem();
+      } else {
+        selectPrevItem();
+      }
+    }, 50);
   }
-
-  const debounceWheel = e => {
-    console.log('bounce', e.target);
-    console.log('bounce', e.deltaY);
-    if (e.deltaY >= 0) {
-      selectNextItem();
-    } else {
-      selectPrevItem();
-    }
-  };
 
   const selectNextItem = () => {
     if (currentIndex < navArr.length - 1) {
