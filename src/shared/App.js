@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import './App.scss';
 import Navigator from 'components/navigator/Navigator';
 import ActionLog from 'components/action-log/ActionLog';
 import imgFrame from 'assets/frame.png';
 import { Home, Intro, UiPage } from 'pages/index';
+import 'styles/index.scss';
 
 const App = props => {
   return (

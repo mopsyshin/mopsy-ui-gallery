@@ -93,6 +93,12 @@
           } 
         }
       }
+      &.blank {
+        cursor: unset;
+        &:hover {
+          background-color: transparent;
+        }
+      }
     }
   }
 }

@@ -144,8 +144,8 @@ const Calendar = props => {
   const selectDay = fullDate => {
     if (fullDate) {
       setSelectedDay(fullDate);
+      store.addLog(`[Calendar : Select Day] ${fullDate}`);
     }
-    store.addLog(`[Calendar : Select Day] ${fullDate}`);
   }
 
   const holidayCheck = (index) => {
@@ -170,13 +170,13 @@ const Calendar = props => {
   }
 
   const renderCalendarDates = () => {
-    return dates.map((date, index) => {
+    return dates.map((data, index) => {
       return (
-        <DateItem data={date}
+        <DateItem data={data}
                   key={index}
                   holiday={holidayCheck(index)}
-                  isSelected={selectedDay === date.fullDate}
-                  onClick={() => {selectDay(date.fullDate)}}/>
+                  selected={selectedDay === data.fullDate}
+                  onClick={() => {selectDay(data.fullDate)}}/>
       )
     })
   }
@@ -205,8 +205,12 @@ const Calendar = props => {
 }
 
 const DateItem = props => {
+  const holiday = props.holiday ? ` ${props.holiday}` : '';
+  const selected = props.selected ? ' selected' : '';
+  const blank = props.data.fullDate ? '' : ' blank';
+
   return (
-    <div className={`date-item ${props.isSelected ? 'selected ' : ''}${props.holiday}`}
+    <div className={`date-item${selected}${holiday}${blank}`}
          onClick={props.onClick}>
       {props.data.date}
     </div>

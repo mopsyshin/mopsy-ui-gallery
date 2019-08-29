@@ -1,0 +1,40 @@
+.dummy-list-container {
+  opacity: 0;
+  &.active {
+    opacity: 1;
+  }
+  .loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      animation: spinRotate 1s infinite;
+    }
+    .loading-message {
+      margin-top: 24px;
+    }
+  }
+  .dummy-items {
+    position: relative;
+    z-index: 5;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+      transition: all 0.3s;
+    }
+  }
+}

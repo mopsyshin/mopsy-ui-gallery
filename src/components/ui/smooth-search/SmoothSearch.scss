@@ -1,0 +1,115 @@
+@import 'styles/variables.scss';
+
+.smooth-search-page {
+  width: 100%;
+  height: 100%;
+  margin-top: 100px;
+  .search-input-container {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    padding: 8px 24px 12px;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(0px);
+    transition: all 0.3s;
+    z-index: 10;
+    border-bottom: 1px solid $nd08;
+    &.init {
+      transform: translateY(250px);
+      border: none;
+    }
+    .input-wrapper {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      position: relative;
+      transition: all 0.3s;
+      &.active {
+        width: calc(100% - 90px);
+      }
+    }
+    input {
+      width: 100%;
+      margin: 0;
+      padding: 16px;
+      border: 0;
+      background-color: rgba(0, 0, 0, 0.08);
+      height: 40px;
+      border-radius: 32px;
+      font-size: 16px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .btn-clear {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 16px;
+      border: none;
+      border-radius: 24px;
+      background-color: rgba(0, 0, 0, 0.08);
+      animation: fadeIn 0.3s 0.1s both;
+      line-height: 0;
+    }
+    .btn-submit {
+      width: 80px;
+      height: 40px;
+      border: none;
+      background-color: #5385ff;
+      color: #ffffff;
+      font-size: 16px;
+      border-radius: 32px;
+      transition: all 0.3s;
+      position: absolute;
+      right: 24px;
+      line-height: 0;
+      animation: fadeIn 0.3s 0.1s backwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      .spinner-wrapper {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        transition: all 0.3s;
+        transform: translateY(-48px);
+        &.active {
+          transform: translateY(0px);
+        }
+        .spinner {
+          width: 16px;
+          height: 16px;
+          animation: spinRotate 1s 0.1s infinite;
+        }
+      }
+      .text {
+        transition: all 0.3s;
+        transform: translateY(48px);
+        &.active {
+          transform: translateY(0px);
+        }
+      }
+      &:disabled {
+        cursor: not-allowed;
+        background-color: #dfdfdf;
+      }
+    } 
+  }
+  .search-result-container {
+    position: absolute;
+    top: 168px;
+    left: 0;
+    padding: 0 24px;
+    width: 100%;
+    height: calc(100% - 168px);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

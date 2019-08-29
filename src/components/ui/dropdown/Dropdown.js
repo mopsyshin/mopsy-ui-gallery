@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { UiContext } from 'stores';
 import './Dropdown.scss';
 import IcArrow from 'assets/IcArrow';
-import data from './sample';
+import data from '../../../dummy/dropdownSample';
 
 
 const Dropdown = props => {

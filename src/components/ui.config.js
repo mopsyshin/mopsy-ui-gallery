@@ -1,4 +1,4 @@
-import SearchInput from './ui/search-input/SearchInput';
+import SmoothSearch from './ui/smooth-search/SmoothSearch';
 import Dropdown from './ui/dropdown/Dropdown';
 import Calendar from './ui/calendar/Calendar';
 import SimpleTab from './ui/simple-tab/SimpleTab';
@@ -9,10 +9,10 @@ import ToggleInput from './ui/toggle-input/ToggleInput';
 import FloatingMenu from './ui/floating-menu/FloatingMenu';
 
 export default {
-  searchInput: {
-    name: 'Smooth Search Input',
-    path: 'search-input',
-    comp: SearchInput,
+  smoothSearch: {
+    name: 'Smooth Search',
+    path: 'smooth-search',
+    comp: SmoothSearch,
   },
   dropdown: {
     name: 'Dropdown',

@@ -5,7 +5,7 @@ import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 const Home = props => {
 
   return (
-    <TransitionWrapper title="Mopsy UI Gallery">
+    <TransitionWrapper title="Mopsy UI Gallery" location={props.location}>
       Home
     </TransitionWrapper>
   )

@@ -20,12 +20,3 @@ $b100: rgb(67, 111, 255);
 $r300: rgb(255, 27, 57);
 $r200: rgb(255, 59, 85);
 $r100: rgb(255, 68, 93);
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
