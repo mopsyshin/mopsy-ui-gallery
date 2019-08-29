@@ -16,7 +16,7 @@ const UiPage = props => {
 
   return (
     <div className="ui-container">
-      <TransitionWrapper title={Component.name} location={props.location}>
+      <TransitionWrapper title={Component.name} location={props.location} history={props.history}>
         <Component.comp />
         <Toast/>
       </TransitionWrapper>

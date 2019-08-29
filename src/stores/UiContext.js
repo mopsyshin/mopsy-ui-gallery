@@ -48,6 +48,7 @@ class UiStore {
         let i = 0;
         let timer = setInterval(() => {
           this.dummyList.push(dummyData.data[i]);
+          this.addLog(`[Dummy Data : Push] ${dummyData.data[i].title}`);
           if (i < result.data.length - 1) {
             i += 1;
           } else {

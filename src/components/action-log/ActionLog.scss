@@ -4,14 +4,15 @@
   font-family: 'Monaco', Courier, monospace;
   position: absolute;
   right: 0;
-  min-width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 100vh;
   resize: both;
   .log-display {
     position: static;
     width: 100%;
     height: 100%;
-    background-color: $nd04;
+    background-color: #333438;
     padding: 24px;
     overflow: auto;
     .log-list {
@@ -23,7 +24,7 @@
       min-height: 100%;
       .log-item {
         font-size: 13px;
-        color: $nd80;
+        color: #ffffff;
         font-weight: 500;
         margin: 2px 0px;
         line-height: 1.4;
@@ -34,9 +35,9 @@
     position: absolute;
     top: 24px;
     right: 24px;
-    background-color: $nd08;
+    background-color: $nd40;
     padding: 10px 16px 8px;
     border-radius: 24px;
-    color: $nd60;
+    color: #ffffff;
   }
 }

@@ -50,7 +50,7 @@ export default {
     comp: ToggleInput,
   },
   floatingMenu: {
-    name: 'floatingMenu',
+    name: 'Floating Menu',
     path: 'floating-menu',
     comp: FloatingMenu,
   }
