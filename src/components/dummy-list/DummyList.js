@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import './DummyList.scss';
 import Spinner from 'assets/Spinner';
 import { UiContext } from 'stores';
-import { openSync } from 'fs';
 
 const DummyList = props => {
   const store = useContext(UiContext);
@@ -26,7 +25,7 @@ const DummyList = props => {
           <Spinner color="#ddd" width="48" height="48"/>
         </div>
         <div className="loading-message">
-          Searching...
+          Searching <span className="searching-value">'{props.searchingValue}'</span>...
         </div>
       </div>
     </div>
@@ -40,8 +39,14 @@ const DummyItem = props => {
       <div className="author">
         {props.data.author}
       </div>
+      <div className="title">
+        {props.data.title}
+      </div>
       <div className="body">
         {props.data.body}
+      </div>
+      <div className="date">
+        {props.data.date}
       </div>
     </div>
   )

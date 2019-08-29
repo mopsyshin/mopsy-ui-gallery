@@ -100,11 +100,11 @@
   }
   .search-result-container {
     position: absolute;
-    top: 168px;
+    top: 160px;
     left: 0;
     padding: 0 24px;
     width: 100%;
-    height: calc(100% - 168px);
+    height: calc(100% - 164px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;

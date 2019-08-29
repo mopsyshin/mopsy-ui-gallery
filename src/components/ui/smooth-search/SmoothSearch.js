@@ -13,6 +13,7 @@ const SmoothSearch = props => {
   const [inputValue, setInputValue] = useState("");
   const [initState, setInitState] = useState(true);
   const [count, setCount] = useState(1);
+  let searchInput;
 
   const updateInputValue = e => {
     setInputValue(e.target.value);
@@ -26,6 +27,7 @@ const SmoothSearch = props => {
   const clearInputValue = () => {
     store.addLog('[Search Input : Clear] Clear Search Input');
     updateInputValue({target: {value: ''}});
+    searchInput.focus();
   }
 
   const submit = async () => {
@@ -85,6 +87,7 @@ const SmoothSearch = props => {
         >
           <input
             type="text"
+            ref={ref => searchInput = ref}
             value={inputValue}
             onChange={updateInputValue}
             onKeyPress={enterSubmit}
@@ -102,7 +105,7 @@ const SmoothSearch = props => {
         {renderSubmitButton()}
       </div>
       <div className="search-result-container">
-        <DummyList initState={initState}/>
+        <DummyList initState={initState} searchingValue={inputValue}/>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .dummy-list-container {
   opacity: 0;
   &.active {
@@ -26,15 +28,54 @@
     }
     .loading-message {
       margin-top: 24px;
+      padding-bottom: 48px;
+      .searching-value {
+        color: $b100;
+      }
     }
   }
   .dummy-items {
     position: relative;
+    padding-top: 8px;
+    padding-bottom: 64px;
     z-index: 5;
     opacity: 0;
     &.active {
       opacity: 1;
       transition: all 0.3s;
     }
+  }
+}
+
+.dummy-item-container {
+  padding: 24px;
+  background-color: #ffffff;
+  box-shadow: 1px 2px 16px $nd08;
+  border-radius: 16px;
+  animation: fadeIn 1s;
+  margin-top: 12px;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  .author {
+    color: $b300;
+    font-size: 14px;
+  }
+  .title {
+    font-size: 24px;
+    margin-top: 8px;
+    font-weight: 600;
+    color: $nd70;
+  }
+  .body  {
+    margin-top: 6px;
+    line-height: 1.2;
+    color: $nd50;
+  }
+  .date {
+    text-align: right;
+    margin-top: 12px;
+    color: $nd40;
   }
 }

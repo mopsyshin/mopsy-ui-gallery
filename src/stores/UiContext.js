@@ -53,7 +53,7 @@ class UiStore {
           } else {
             clearInterval(timer);
           }
-        }, 50);
+        }, 100);
         resolve('success');
       }, 2000);
     })
