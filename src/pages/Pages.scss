@@ -6,12 +6,44 @@
 }
 
 .home-container {
-  top: 100px;
+  top: 96px;
   position: absolute;
   width: 100%;
-  height: calc(100% - 100px);
+  height: calc(100% - 70px);
   padding: 0px 24px;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .introduction {
+    padding: 48px 0px;
+    text-align: center;
+    .logo {
+      width: 128px;
+    }
+    .title {
+      font-size: 48px;
+      font-weight: 600;
+      color: $nd70;
+      letter-spacing: -1px;
+    }
+    .author {
+      margin-top: 8px;
+      color: $nd50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .social {
+      margin-top: 24px;
+      .btn-social {
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        margin: 0px 8px;
+      }
+    }
+  }
   .mobile-nav {
     .nav-item {
       display: flex;

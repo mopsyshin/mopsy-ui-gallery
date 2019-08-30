@@ -7,7 +7,7 @@
   align-items: center;
   flex-direction: column;
   width: 375px;
-  height: 814px;
+  height: 808px;
   overflow-x: hidden;
   overflow-y: scroll;
   opacity: 0;
@@ -29,6 +29,7 @@
     width: 100%;
     height: 48px;
     padding-left: 8px;
+    border-bottom: 1px solid $nd04;
     & > .left-side {
       display: flex;
       align-items: center;
@@ -56,4 +57,12 @@
     }
   }
   
+}
+
+
+@media (max-width: 600px) {
+  .transition-wrapper {
+    width: 100%;
+    height: 100vh;
+  }
 }
