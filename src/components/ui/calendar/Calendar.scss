@@ -10,9 +10,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $nd70;
-    color: #ffffff;
     padding: 0 16px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid $nd08;
+      border-radius: 4px;
+    }
     .btn-prev-month {
       transform: rotate(90deg);
     }
