@@ -7,7 +7,8 @@ const Navigator = props => {
   const store = useContext(UiContext);
   const navArr = Object.entries(config);
   const [bounceState, setBounceState] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(Math.round(navArr.length / 2));
+  // const [currentIndex, setCurrentIndex] = useState(Math.round(navArr.length / 2));
+  const [currentIndex, setCurrentIndex] = useState(2);
   const [isUi, setIsUi] = useState(false);
   
   let navList;
