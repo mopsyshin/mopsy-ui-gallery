@@ -13,14 +13,7 @@ const Home = props => {
 
   const renderNav = () => {
     return navArr.map(([key, value], index) => {
-      return (
-        <div className="nav-item" onClick={() => {selectNav(value.path)}} key={key}>
-          {value.name}
-          <div className="ic-arrow">
-            <IcArrow/>
-          </div>
-        </div>
-      );
+      return <HomeNavItem key={key} value={value} onClick={selectNav}/>
     });
   };
 
@@ -33,6 +26,28 @@ const Home = props => {
       </div>
     </TransitionWrapper>
   )
+}
+
+const HomeNavItem = props => {
+
+  const wip = () => {
+    if (props.value.wip) {
+      return <p className="wip">Work in progress</p>
+    }
+  }
+
+  return (
+    <div className="nav-item" onClick={() => {props.onClick(props.value.path)}}>
+      <div>
+        <p>{props.value.name}</p>
+        {wip()}
+      </div>
+      
+      <div className="ic-arrow">
+        <IcArrow/>
+      </div>
+    </div>
+  );
 }
 
 export default Home;

@@ -13,45 +13,54 @@ export default {
     name: 'Smooth Search',
     path: 'smooth-search',
     comp: SmoothSearch,
+    wip: false,
   },
   dropdown: {
     name: 'Dropdown',
     path: 'dropdown',
     comp: Dropdown,
+    wip: false,
   },
   calendar: {
     name: 'Calendar',
     path: 'calendar',
     comp: Calendar,
+    wip: false,
   },
   simpleTab: {
     name: 'Simple Tab',
     path: 'simple-tab',
     comp: SimpleTab,
+    wip: true,
   },
   infiniteScrollView: {
     name: 'Infinite Scroll View',
     path: 'infinite-scroll-view',
     comp: InfiniteScrollView,
+    wip: true,
   },
   gorgeousPost: {
     name: 'Gorgeous Post',
     path: 'gorgeous-post',
     comp: GorgeousPost,
+    wip: true,
   },
   scrollBanner: {
     name: 'Scroll Banner',
     path: 'scroll-banner',
     comp: ScrollBanner,
+    wip: true,
   },
   toggleInput: {
     name: 'Toggle Input',
     path: 'toggle-input',
     comp: ToggleInput,
+    wip: true,
   },
   floatingMenu: {
     name: 'Floating Menu',
     path: 'floating-menu',
     comp: FloatingMenu,
+    wip: true,
   }
 }

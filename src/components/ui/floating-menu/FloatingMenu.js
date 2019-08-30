@@ -6,7 +6,7 @@ const FloatingMenu = props => {
 
   return (
     <div>
-      floating
+      Work in progress
     </div>
   )
 }

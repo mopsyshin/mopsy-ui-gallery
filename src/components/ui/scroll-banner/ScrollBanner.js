@@ -6,7 +6,7 @@ const ScrollBanner = props => {
 
   return (
     <div>
-      scroll banner
+      Work in progress
     </div>
   )
 }

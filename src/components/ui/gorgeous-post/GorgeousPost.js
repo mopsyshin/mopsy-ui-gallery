@@ -6,7 +6,7 @@ const GorgeousPost = props => {
 
   return (
     <div>
-      gorgeous
+      Work in progress
     </div>
   )
 }

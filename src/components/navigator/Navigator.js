@@ -149,6 +149,12 @@ const NavItem = props => {
   const scale = 1 - (distance / 10);
   const opacity = 1 - (distance / 5);
 
+  const wip = () => {
+    if (props.value.wip) {
+      return <p className="wip">work in progress</p>
+    }
+  }
+
   return (
     <div
       className="nav-item"
@@ -158,6 +164,7 @@ const NavItem = props => {
       <div className={`text-wrapper ${props.isActive ? "active" : ""}`}
            style={{transform: `scale(${scale})`, opacity: opacity}}>
         <span>{props.value.name}</span>
+        {wip()}
       </div>
     </div>
   );

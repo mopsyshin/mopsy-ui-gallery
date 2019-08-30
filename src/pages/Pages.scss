@@ -25,6 +25,10 @@
       box-shadow: 1px 4px 16px $nd08;
       border-radius: 16px;
       cursor: pointer;
+      .wip {
+        font-size: 14px;
+        color: $r100;
+      }
       .ic-arrow {
         transform: rotate(-90deg);
       }

@@ -5,7 +5,7 @@ const SimpleTab = props => {
 
   return (
     <div>
-      SimpleTab
+      Work in progress
     </div>
   )
 }

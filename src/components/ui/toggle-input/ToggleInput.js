@@ -6,7 +6,7 @@ const ToggleInput = props => {
 
   return (
     <div>
-      toggle input
+      Work in progress
     </div>
   )
 }

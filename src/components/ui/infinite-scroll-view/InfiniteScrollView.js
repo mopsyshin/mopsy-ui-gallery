@@ -6,7 +6,7 @@ const InfiniteScrollView = props => {
 
   return (
     <div>
-      infinite
+      Work in progress
     </div>
   )
 }
