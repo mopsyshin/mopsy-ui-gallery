@@ -185,13 +185,13 @@ const Calendar = props => {
     <div className="calendar-container">
       <div className="calendar-header">
         <button className="btn-prev-month" onClick={prevMonth}>
-          <IcArrow/>
+          <IcArrow color="#ffffff"/>
         </button>
         <div className="month-info">
           {`${calendarData.year} . ${calendarData.month}`}
         </div>
         <button className="btn-next-month" onClick={nextMonth}>
-          <IcArrow/>
+          <IcArrow color="#ffffff"/>
         </button>
       </div>
       <div className="calendar-day">

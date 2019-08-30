@@ -58,6 +58,7 @@ a {
 }
 
 button {
+  background-color: transparent;
   cursor: pointer;
   &:focus {
     outline: none;
@@ -78,3 +79,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+* { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }

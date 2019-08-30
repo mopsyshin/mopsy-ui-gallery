@@ -40,3 +40,24 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .App {
+    .main-container {
+      height: 100%;
+      & > .left-side {
+        display: none;
+      }
+    }
+    .frame-container {
+      top: -80px;
+      width: 100%;
+      min-width: inherit;
+      height: 100%;
+      margin: 0;
+      .img-frame {
+        display: none;
+      }
+    }
+  }
+}
