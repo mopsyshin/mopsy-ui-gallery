@@ -33,6 +33,9 @@
     min-width: 431px;
     height: 865px;
     margin: 0 80px;
+    .inner-frame {
+      width: 375px;
+    }
     .img-frame {
       width: 100%;
       position: absolute;
@@ -56,6 +59,9 @@
       min-width: inherit;
       height: 100vh;
       margin: 0;
+      .inner-frame {
+        width: 100%;
+      }
       .img-frame {
         display: none;
       }
