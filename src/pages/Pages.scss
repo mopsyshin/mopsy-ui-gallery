@@ -12,6 +12,7 @@
   height: calc(100% - 70px);
   padding: 0px 24px;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar {
     display: none;
   }
