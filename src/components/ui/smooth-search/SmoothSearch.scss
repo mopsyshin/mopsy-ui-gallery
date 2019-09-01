@@ -1,12 +1,13 @@
 @import 'styles/variables.scss';
 
 .smooth-search-page {
+  position: absolute;
+  top: 96px;
+  left: 0;
   width: 100%;
-  height: 100%;
-  margin-top: 100px;
+  height: calc(100% - 96px);
   .search-input-container {
     position: absolute;
-    top: 100px;
     width: 100%;
     padding: 8px 24px 12px;
     display: flex;
@@ -101,11 +102,11 @@
   }
   .search-result-container {
     position: absolute;
-    top: 160px;
+    top: 60px;
     left: 0;
     padding: 0 24px;
     width: 100%;
-    height: calc(100% - 164px);
+    height: calc(100% - 60px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;

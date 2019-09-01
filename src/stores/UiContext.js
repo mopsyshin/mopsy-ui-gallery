@@ -38,6 +38,11 @@ class UiStore {
   }
 
   @action
+  clearDummyData() {
+    this.dummyList = [];
+  }
+
+  @action
   getDummyData() {
     return new Promise(resolve => {
       this.loadingState = true;
@@ -56,7 +61,7 @@ class UiStore {
           }
         }, 100);
         resolve('success');
-      }, 2000);
+      }, 1000);
     })
   }
 }

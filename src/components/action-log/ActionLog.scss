@@ -44,6 +44,12 @@
 
 @media (max-width: 1400px) {
   .action-log-container {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .action-log-container {
     display: none;
   }
 }

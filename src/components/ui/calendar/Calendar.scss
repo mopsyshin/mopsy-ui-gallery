@@ -1,9 +1,11 @@
 @import 'styles/variables.scss';
 
 .calendar-container {
-  margin-top: 100px;
+  position: absolute;
+  top: 96px;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 96px);
   .calendar-header {
     width: 100%;
     height: 64px;
