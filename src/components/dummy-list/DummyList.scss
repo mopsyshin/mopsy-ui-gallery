@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s;
+    transition: opacity 0.5s;
     opacity: 0;
     &.active {
       opacity: 1;
@@ -42,7 +42,7 @@
     opacity: 0;
     &.active {
       opacity: 1;
-      transition: all 0.3s;
+      transition: opacity 0.3s;
     }
   }
 }
@@ -54,7 +54,7 @@
   border-radius: 16px;
   animation: fadeIn 1s;
   margin-top: 12px;
-  transition: all 0.3s;
+  transition: transform 0.3s;
   &:hover {
     transform: scale(1.05);
   }

@@ -2,7 +2,6 @@ import { observable, action } from 'mobx';
 import { createContext } from 'react';
 import dummyData from '../dummy/dummyListSample';
 
-
 class UiStore {
   @observable
   dummyList = [];

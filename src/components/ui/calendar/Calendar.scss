@@ -65,7 +65,7 @@
       border-radius: 24px;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: color 0.3s, background-color 0.3s;
       line-height: 1.6;
       &.saturday {
         color: $b300;
@@ -84,7 +84,7 @@
         height: 48px;
         background-color: #ffffff;
         border-radius: 24px;
-        transition: all 0.3s;
+        transition: transform 0.3s, background-color 0.3s;
         transform: scale(0);
       }
       &.selected {

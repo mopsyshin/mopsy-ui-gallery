@@ -74,18 +74,20 @@ const Dropdown = props => {
 
   return (
     <div className="dropdown-container">
-      <div className={`wrapper ${selecting ? 'selecting' : ''}`} style={{
-        height: wrapperHeight()
-      }}>
-        <div className="display-item" onClick={toggleDropdown}>
-          <div>
-            {selectedItem.display}
+      <div className={`wrapper ${selecting ? 'selecting' : ''}`}>
+        <div className={`scroll-view ${selecting ? 'selecting' : ''}`} style={{
+          height: wrapperHeight()
+        }}>
+          <div className="display-item" onClick={toggleDropdown}>
+            <div>
+              {selectedItem.display}
+            </div>
+            <div className={`ic-wrapper ${selecting ? 'selecting' : ''}`}>
+              <IcArrow/>
+            </div>
           </div>
-          <div className={`ic-wrapper ${selecting ? 'selecting' : ''}`}>
-            <IcArrow/>
-          </div>
+          { dropdownList() }
         </div>
-        { dropdownList() }
       </div>
     </div>
   )
