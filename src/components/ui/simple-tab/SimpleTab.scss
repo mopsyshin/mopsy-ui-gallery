@@ -9,7 +9,14 @@
   .tab-header {
     position: relative;
     display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
     border-bottom: 1px solid $nd08;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .tab-item {
       padding: 16px 24px;
     }
