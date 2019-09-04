@@ -21,9 +21,10 @@
     text-align: center;
     .logo {
       width: 128px;
+      margin-bottom: 32px;
     }
     .title {
-      font-size: 48px;
+      font-size: 36px;
       font-weight: 600;
       color: $nd70;
       letter-spacing: -1px;
@@ -36,7 +37,7 @@
       align-items: center;
     }
     .social {
-      margin-top: 24px;
+      margin-top: 48px;
       .btn-social {
         cursor: pointer;
         width: 32px;
@@ -46,6 +47,7 @@
     }
   }
   .mobile-nav {
+    padding-bottom: 64px;
     .nav-item {
       display: flex;
       justify-content: space-between;

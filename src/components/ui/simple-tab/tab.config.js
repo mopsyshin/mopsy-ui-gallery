@@ -1,22 +1,32 @@
 export default [
   {
-    tabName: 'Tab name1',
+    tabName: 'Hi',
+    path: 'hi',
+    color: '#436fff',
     isActive: false,
   },
   {
-    tabName: 'Tab name2',
+    tabName: 'My Name Is',
+    path: 'my-name',
+    color: '#9643ff',
     isActive: false,
   },
   {
-    tabName: 'Tab name3',
+    tabName: 'Mopsy Shin',
+    path: 'mopsy',
+    color: '#ba31e4',
     isActive: false,
   },
   {
-    tabName: 'Tab name4',
+    tabName: 'Nice To Meet You',
+    path: 'nice',
+    color: '#e4319b',
     isActive: false,
   },
   {
-    tabName: 'Tab name5',
+    tabName: 'Bye',
+    path: 'bye',
+    color: '#e43150',
     isActive: false,
   }
 ]

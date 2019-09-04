@@ -11,8 +11,9 @@ const TransitionWrapper = props => {
     setTimeout(() => {
       setPageTransition(true);
     }, 50)
-  }, [props.location]);
+  }, [props.location.pathname]);
 
+  
   const openCode = () => {
     const baseUrl = 'https://github.com/mopsyshin/mopsy-ui-gallery/blob/master/src/components';
     window.open(`${baseUrl}${props.location.pathname}`);

@@ -31,7 +31,7 @@ export default {
     name: 'Simple Tab',
     path: 'simple-tab',
     comp: SimpleTab,
-    wip: true,
+    wip: false,
   },
   infiniteScrollView: {
     name: 'Infinite Scroll View',
