@@ -2,7 +2,8 @@
 
 .action-log-container {
   font-family: 'Monaco', Courier, monospace;
-  position: absolute;
+  position: fixed;
+  top: 0;
   right: 0;
   width: 100%;
   max-width: 600px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useContext } from 'react';
 import './Calendar.scss';
 import IcArrow from 'assets/IcArrow';
 import UiContext from 'stores/UiContext';

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./SimpleTab.scss";
 import tabs from "./tab.config";
 
 const SimpleTab = props => {
   const tabMenus = tabs;
+  const tabWrapper = useRef(null);
   const [currentTab, setCurrentTab] = useState(tabMenus[0]);
   const [indicatorStyle, setIndicatorStyle] = useState(0);
 
@@ -15,6 +16,7 @@ const SimpleTab = props => {
       transX: target.offsetLeft,
       backgroundColor: data.color
     });
+    tabWrapper.current.scrollLeft = target.offsetLeft - 64;
   };
 
   const renderTabItems = () => {
@@ -29,7 +31,7 @@ const SimpleTab = props => {
 
   return (
     <div className="simple-tab-container">
-      <div className="tab-header">
+      <div className="tab-header" ref={tabWrapper}>
         {renderTabItems()}
         <div
           className="tab-indicator"
