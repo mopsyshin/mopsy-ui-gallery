@@ -14,6 +14,9 @@ class UiStore {
 
   @observable
   loadingState = false;
+
+  @observable
+  searchingValue = '';
 	
   @action 
   addToast(toastItem) {
@@ -39,6 +42,11 @@ class UiStore {
   @action
   clearDummyData() {
     this.dummyList = [];
+  }
+
+  @action
+  setSearchingValue(value) {
+    this.searchingValue = value; 
   }
 
   @action

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import './DummyList.scss';
 import Spinner from 'assets/Spinner';
@@ -25,7 +25,7 @@ const DummyList = props => {
           <Spinner color="#ddd" width="48" height="48"/>
         </div>
         <div className="loading-message">
-          Searching <span className="searching-value">'{props.searchingValue}'</span>...
+          Searching <span className="searching-value">'{store.searchingValue}'</span>...
         </div>
       </div>
     </div>

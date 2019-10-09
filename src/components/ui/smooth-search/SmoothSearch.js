@@ -33,6 +33,7 @@ const SmoothSearch = props => {
   const submit = async () => {
     if (!inputIsEmpty && !store.loadingState) {
       setInitState(false);
+      store.setSearchingValue(inputValue);
       store.addLog(`[Search Input : Search] ${inputValue}`);
       store.addToast({
         id: count,
@@ -105,7 +106,7 @@ const SmoothSearch = props => {
         {renderSubmitButton()}
       </div>
       <div className="search-result-container">
-        <DummyList initState={initState} searchingValue={inputValue}/>
+        <DummyList initState={initState}/>
       </div>
     </div>
   );
