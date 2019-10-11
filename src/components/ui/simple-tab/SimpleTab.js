@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "./SimpleTab.scss";
 import tabs from "./tab.config";
+import UiContext from 'stores/UiContext';
 
 const SimpleTab = props => {
+  const store = useContext(UiContext);
   const tabMenus = tabs;
   const tabWrapper = useRef(null);
   const [currentTab, setCurrentTab] = useState(tabMenus[0]);
@@ -10,6 +12,7 @@ const SimpleTab = props => {
 
   const selectTab = data => {
     setCurrentTab(data);
+    store.addLog(`[Simple Tab : Select Tab] ${data.path}`);
     const target = document.querySelector(`.tab-item.${data.path}`);
     setIndicatorStyle({
       width: target.getBoundingClientRect().width,
@@ -40,7 +43,8 @@ const SimpleTab = props => {
             backgroundColor: indicatorStyle.backgroundColor,
             transform: `translateX(${indicatorStyle.transX}px)`
           }}
-        ></div>
+        >
+        </div>
       </div>
       <div className="tab-body">
         <TabPage data={currentTab} />
