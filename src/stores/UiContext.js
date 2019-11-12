@@ -4,6 +4,9 @@ import dummyData from '../dummy/dummyListSample';
 
 class UiStore {
   @observable
+  history = [];
+
+  @observable
   dummyList = [];
 
   @observable
@@ -47,6 +50,16 @@ class UiStore {
   @action
   setSearchingValue(value) {
     this.searchingValue = value; 
+  }
+
+  @action
+  pushHistory(path) {
+    this.history.push(path);
+  }
+
+  @action
+  backHistory() {
+    this.history.pop();
   }
 
   @action

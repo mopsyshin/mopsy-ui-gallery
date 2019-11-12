@@ -7,7 +7,6 @@ const Navigator = props => {
   const store = useContext(UiContext);
   const navArr = Object.entries(config);
   const [bounceState, setBounceState] = useState(false);
-  // const [currentIndex, setCurrentIndex] = useState(Math.round(navArr.length / 2));
   const [currentIndex, setCurrentIndex] = useState(2);
   const [isUi, setIsUi] = useState(false);
 
@@ -54,11 +53,12 @@ const Navigator = props => {
 
   const selectItem = index => {
     const path = navArr[index][1].path;
-    props.history.push(`/ui/${path}`);
     setNavOffset(path);
     setCurrentIndex(index);
     setIsUi(true);
     store.addLog(`[Navigator : Move to] ${path}`);
+    store.pushHistory(path);
+    props.history.push(`/ui/${path}`);
   };
 
   const debounce = (e, callback, delay) => {

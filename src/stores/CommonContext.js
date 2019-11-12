@@ -41,7 +41,7 @@ const CommonProvider = props => {
     },
     clearLog: () => {
       setState({...state, logs: ['[Action Log] Clear Logs']});
-    }
+    },
   };
 
   return (

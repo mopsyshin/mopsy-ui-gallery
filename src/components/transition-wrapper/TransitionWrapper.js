@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import './TransitionWrapper.scss';
 import IcArrow from 'assets/IcArrow';
+import UiContext from 'stores/UiContext';;
 
 const TransitionWrapper = props => {
+  const store = useContext(UiContext);
   const [pageTransition, setPageTransition] = useState(false);
 
   useEffect(() => {
@@ -20,7 +22,13 @@ const TransitionWrapper = props => {
   }
 
   const goBack = () => {
-    props.history.goBack();
+    if (store.history.length) {
+      store.backHistory();
+      props.history.goBack();
+    } else {
+      props.history.push('/');
+    }
+    
   }
 
   const renderBtnBack = () => {

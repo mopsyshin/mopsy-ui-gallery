@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Pages.scss';
 import TransitionWrapper from 'components/transition-wrapper/TransitionWrapper';
 import config from 'components/ui.config';
@@ -6,11 +6,14 @@ import IcArrow from 'assets/IcArrow';
 import IcMopsy from 'assets/ic_mopsy.svg';
 import IcGithub from 'assets/github.png';
 import IcFb from 'assets/fb.png';
+import UiContext from 'stores/UiContext';
 
 const Home = props => {
+  const store = useContext(UiContext);
   const navArr = Object.entries(config);
 
   const selectNav = path => {
+    store.pushHistory(path);
     props.history.push(`ui/${path}`);
   }
 
