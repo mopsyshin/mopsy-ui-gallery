@@ -3,7 +3,7 @@ import "./Navigator.scss";
 import config from "components/ui.config";
 import { UiContext } from "stores";
 
-const Navigator = props => {
+const Navigator = (props) => {
   const store = useContext(UiContext);
   const navArr = Object.entries(config);
   const [bounceState, setBounceState] = useState(false);
@@ -15,7 +15,7 @@ const Navigator = props => {
   let timer = 0;
   let touchY = 0;
 
-  const setNavOffset = useCallback(path => {
+  const setNavOffset = useCallback((path) => {
     const target = document.querySelector(`#${path}`);
     const list = document.querySelector("#nav-list");
     if (list) {
@@ -24,16 +24,22 @@ const Navigator = props => {
   }, []);
 
   useEffect(() => {
-    navList.addEventListener("wheel", e => {
-      e.preventDefault();
-    },{ passive: false });
-    navList.addEventListener("touchstart", e => {
-
-    }, { passive: false });
-    navList.addEventListener("touchmove", e => {
-      e.preventDefault();
-    }, { passive: false });
-    navList.addEventListener("keydown", e => {
+    navList.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+      },
+      { passive: false }
+    );
+    navList.addEventListener("touchstart", (e) => {}, { passive: false });
+    navList.addEventListener(
+      "touchmove",
+      (e) => {
+        e.preventDefault();
+      },
+      { passive: false }
+    );
+    navList.addEventListener("keydown", (e) => {
       e.preventDefault();
     });
     const pathname = props.location.pathname.split("/");
@@ -51,7 +57,7 @@ const Navigator = props => {
     });
   }, [props.location.pathname, navList, navArr, currentIndex, setNavOffset]);
 
-  const selectItem = index => {
+  const selectItem = (index) => {
     const path = navArr[index][1].path;
     setNavOffset(path);
     setCurrentIndex(index);
@@ -82,7 +88,7 @@ const Navigator = props => {
     return;
   };
 
-  const onKeyDown = e => {
+  const onKeyDown = (e) => {
     switch (e.keyCode) {
       case 40:
         selectNextItem();
@@ -95,21 +101,25 @@ const Navigator = props => {
     }
   };
 
-  const onWheel = e => {
-    debounce(e, event => {
-      if (event.deltaY >= 0) {
-        selectNextItem();
-      } else {
-        selectPrevItem();
-      }
-    }, 50);
+  const onWheel = (e) => {
+    debounce(
+      e,
+      (event) => {
+        if (event.deltaY >= 0) {
+          selectNextItem();
+        } else {
+          selectPrevItem();
+        }
+      },
+      50
+    );
   };
 
-  const onTouchStart = e => {
+  const onTouchStart = (e) => {
     touchY = e.touches[0].pageY;
-  }
+  };
 
-  const onTouchMove = e => {
+  const onTouchMove = (e) => {
     let offsetY;
     offsetY = touchY - e.changedTouches[0].pageY;
     if (offsetY > 0) {
@@ -117,7 +127,7 @@ const Navigator = props => {
     } else {
       selectPrevItem();
     }
-  }
+  };
 
   const selectNextItem = () => {
     if (currentIndex < navArr.length - 1) {
@@ -131,22 +141,6 @@ const Navigator = props => {
     }
   };
 
-  const renderNav = () => {
-    return navArr.map(([key, value], index) => {
-      return (
-        <NavItem
-          key={key}
-          index={index}
-          value={value}
-          currentIndex={currentIndex}
-          isActive={props.location.pathname === `/ui/${value.path}`}
-          location={props.location}
-          onClick={selectItem}
-        />
-      );
-    });
-  };
-
   return (
     <div className="nav-container">
       <div
@@ -157,11 +151,21 @@ const Navigator = props => {
         onWheel={onWheel}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchMove}
-        ref={ref => (navList = ref)}
+        ref={(ref) => (navList = ref)}
       >
         <div className={`center-point ${isUi ? "" : "hidden"}`}></div>
         <div className="blank-item"></div>
-        {renderNav()}
+        {navArr.map(([key, value], index) => (
+          <NavItem
+            key={key}
+            index={index}
+            value={value}
+            currentIndex={currentIndex}
+            isActive={props.location.pathname === `/ui/${value.path}`}
+            location={props.location}
+            onClick={selectItem}
+          />
+        ))}
         <div className="blank-item"></div>
       </div>
     </div>
@@ -170,29 +174,23 @@ const Navigator = props => {
 
 //Nav Item component
 
-const NavItem = props => {
-  const clickItem = () => {
-    props.onClick(props.index);
-  };
-
+const NavItem = (props) => {
   const distance = Math.abs(props.currentIndex - props.index);
   const scale = 1 - distance / 10;
   const opacity = 1 - distance / 5;
 
-  const wip = () => {
-    if (props.value.wip) {
-      return <p className="wip">work in progress</p>;
-    }
-  };
-
   return (
-    <div className="nav-item" onClick={clickItem} id={props.value.path}>
+    <div
+      className="nav-item"
+      onClick={() => props.onClick(props.index)}
+      id={props.value.path}
+    >
       <div
         className={`text-wrapper ${props.isActive ? "active" : ""}`}
         style={{ transform: `scale(${scale})`, opacity: opacity }}
       >
         <span>{props.value.name}</span>
-        {wip()}
+        {props.value.wip && <p className="wip">work in progress</p>}
       </div>
     </div>
   );
