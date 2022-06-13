@@ -1,50 +1,22 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useContext } from "react";
 import "./SimpleTab.scss";
 import tabs from "./tab.config";
 import UiContext from "stores/UiContext";
+import useSimpleTab from "./useSimpleTab";
+import { observer } from "mobx-react-lite";
 
-const SimpleTab = (props) => {
+const SimpleTab = () => {
   const store = useContext(UiContext);
-  const tabMenus = tabs;
-  const tabWrapper = useRef(null);
-  const [currentTab, setCurrentTab] = useState(tabMenus[0]);
-  const [indicatorStyle, setIndicatorStyle] = useState(0);
 
-  const selectTab = useCallback(
-    (data) => {
-      setCurrentTab(data);
-      store.addLog(`[Simple Tab : Select Tab] ${data.path}`);
-      const target = document.querySelector(`.tab-item.${data.path}`);
-      setIndicatorStyle({
-        width: target.getBoundingClientRect().width,
-        transX: target.offsetLeft,
-        backgroundColor: data.color,
-      });
-      tabWrapper.current.scrollLeft = target.offsetLeft - 64;
-    },
-    [store]
-  );
-
-  const renderTabItems = () => {
-    return tabMenus.map((tab, index) => {
-      return <TabItem data={tab} key={index} onClick={selectTab} />;
-    });
-  };
-
-  useEffect(() => {
-    selectTab(tabMenus[0]);
-  }, [tabMenus, selectTab]);
+  const { currentTab, selectTab, tabWrapperRef, tabMenus, indicatorStyle } =
+    useSimpleTab({ store, tabs });
 
   return (
     <div className="simple-tab-container">
-      <div className="tab-header" ref={tabWrapper}>
-        {renderTabItems()}
+      <div className="tab-header" ref={tabWrapperRef}>
+        {tabMenus.map((tab, index) => (
+          <TabItem data={tab} key={index} onClick={selectTab} />
+        ))}
         <div
           className="tab-indicator"
           style={{
@@ -61,26 +33,18 @@ const SimpleTab = (props) => {
   );
 };
 
-const TabItem = (props) => {
-  const selectTab = () => {
-    props.onClick(props.data);
-  };
+const TabItem = ({ onClick, data }) => (
+  <div className={`tab-item ${data.path}`} onClick={() => onClick(data)}>
+    {data.tabName}
+  </div>
+);
 
-  return (
-    <div className={`tab-item ${props.data.path}`} onClick={selectTab}>
-      {props.data.tabName}
+const TabPage = ({ data }) => (
+  <div className="tab-page">
+    <div className="content" style={{ backgroundColor: data.color }}>
+      {data.tabName}
     </div>
-  );
-};
+  </div>
+);
 
-const TabPage = (props) => {
-  return (
-    <div className="tab-page">
-      <div className="content" style={{ backgroundColor: props.data.color }}>
-        {props.data.tabName}
-      </div>
-    </div>
-  );
-};
-
-export default SimpleTab;
+export default observer(SimpleTab);
