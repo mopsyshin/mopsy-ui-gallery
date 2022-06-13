@@ -33,7 +33,7 @@ const Calendar = () => {
       </div>
       <div className="calendar-day">
         {dayNames.map((dayName, index) => (
-          <div className={`day-header ${holidayCheck(index)}`} key={index}>
+          <div className={`day-header ${holidayCheck(index)}`} key={dayName}>
             {dayName}
           </div>
         ))}
@@ -42,7 +42,7 @@ const Calendar = () => {
         {dates.map((data, index) => (
           <DateItem
             data={data}
-            key={index}
+            key={data.fullDate}
             holiday={holidayCheck(index)}
             selected={selectedDay === data.fullDate}
             onClick={() => {
