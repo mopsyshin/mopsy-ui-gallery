@@ -1,26 +1,35 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from "react";
 import "./SimpleTab.scss";
 import tabs from "./tab.config";
-import UiContext from 'stores/UiContext';
+import UiContext from "stores/UiContext";
 
-const SimpleTab = props => {
+const SimpleTab = (props) => {
   const store = useContext(UiContext);
   const tabMenus = tabs;
   const tabWrapper = useRef(null);
   const [currentTab, setCurrentTab] = useState(tabMenus[0]);
   const [indicatorStyle, setIndicatorStyle] = useState(0);
 
-  const selectTab = data => {
-    setCurrentTab(data);
-    store.addLog(`[Simple Tab : Select Tab] ${data.path}`);
-    const target = document.querySelector(`.tab-item.${data.path}`);
-    setIndicatorStyle({
-      width: target.getBoundingClientRect().width,
-      transX: target.offsetLeft,
-      backgroundColor: data.color
-    });
-    tabWrapper.current.scrollLeft = target.offsetLeft - 64;
-  };
+  const selectTab = useCallback(
+    (data) => {
+      setCurrentTab(data);
+      store.addLog(`[Simple Tab : Select Tab] ${data.path}`);
+      const target = document.querySelector(`.tab-item.${data.path}`);
+      setIndicatorStyle({
+        width: target.getBoundingClientRect().width,
+        transX: target.offsetLeft,
+        backgroundColor: data.color,
+      });
+      tabWrapper.current.scrollLeft = target.offsetLeft - 64;
+    },
+    [store]
+  );
 
   const renderTabItems = () => {
     return tabMenus.map((tab, index) => {
@@ -30,7 +39,7 @@ const SimpleTab = props => {
 
   useEffect(() => {
     selectTab(tabMenus[0]);
-  }, [tabMenus]);
+  }, [tabMenus, selectTab]);
 
   return (
     <div className="simple-tab-container">
@@ -41,10 +50,9 @@ const SimpleTab = props => {
           style={{
             width: indicatorStyle.width,
             backgroundColor: indicatorStyle.backgroundColor,
-            transform: `translateX(${indicatorStyle.transX}px)`
+            transform: `translateX(${indicatorStyle.transX}px)`,
           }}
-        >
-        </div>
+        ></div>
       </div>
       <div className="tab-body">
         <TabPage data={currentTab} />
@@ -53,7 +61,7 @@ const SimpleTab = props => {
   );
 };
 
-const TabItem = props => {
+const TabItem = (props) => {
   const selectTab = () => {
     props.onClick(props.data);
   };
@@ -65,7 +73,7 @@ const TabItem = props => {
   );
 };
 
-const TabPage = props => {
+const TabPage = (props) => {
   return (
     <div className="tab-page">
       <div className="content" style={{ backgroundColor: props.data.color }}>

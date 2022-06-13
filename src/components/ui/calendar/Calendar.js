@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect, useCallback, useContext } from 'react';
-import './Calendar.scss';
-import IcArrow from 'assets/IcArrow';
-import UiContext from 'stores/UiContext';
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import "./Calendar.scss";
+import IcArrow from "assets/IcArrow";
+import UiContext from "stores/UiContext";
 
-const Calendar = props => {
+const Calendar = (props) => {
   const store = useContext(UiContext);
-  const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const [dates, setDates] = useState([]);
   const [dayFirst, setDayFirst] = useState(0);
-  const [selectedDay, setSelectedDay] = useState('');
+  const [selectedDay, setSelectedDay] = useState("");
   const [calendarData, setCalendarData] = useState({
     year: 2019,
     month: 1,
@@ -17,7 +17,7 @@ const Calendar = props => {
     dayFirst: 1,
   });
 
-  const initToday = useCallback(data => {
+  const initToday = useCallback((data) => {
     setSelectedDay(getFullDate(data, data.date));
   }, []);
 
@@ -35,7 +35,7 @@ const Calendar = props => {
         year: data.year,
         month: data.month,
         date: i,
-      })
+      });
     }
 
     setDayFirst(dayFirst);
@@ -48,24 +48,25 @@ const Calendar = props => {
     const { data, dayFirst } = makeStandardDate(newDate);
     drawCalendar(data, dayFirst);
     initToday(data);
-  }, [drawCalendar, initToday])
+  }, [drawCalendar, initToday]);
 
-  const makeStandardDate = newDate => {
+  const makeStandardDate = (newDate) => {
     const data = {
       year: newDate.getFullYear(),
       month: newDate.getMonth() + 1,
       date: newDate.getDate(),
       day: newDate.getDay(),
-    }
+    };
 
     let dayFirst = data.day - ((data.date - 1) % 7);
-    if (dayFirst < 0) { dayFirst += 7}
-    
+    if (dayFirst < 0) {
+      dayFirst += 7;
+    }
+
     return { data, dayFirst };
-  }
+  };
 
-  const getDayLength = data => {
-
+  const getDayLength = (data) => {
     const isMatching = (value, arr) => {
       let result = false;
       arr.forEach((num) => {
@@ -73,42 +74,42 @@ const Calendar = props => {
           result = true;
           return;
         }
-      })
+      });
       return result;
-    }
+    };
 
-    if (isMatching(data.month ,[4,6,9,11])) {
+    if (isMatching(data.month, [4, 6, 9, 11])) {
       return 31;
     } else if (isMatching(data.month, [2])) {
-      switch(0) {
+      switch (0) {
         case data.year % 400:
           return 30;
         case data.year % 100:
           return 29;
         case data.year % 4:
           return 30;
-        default: 
+        default:
           return 29;
       }
     }
     return 32;
-  }
+  };
 
   const getFullDate = (data, dateNum) => {
-    const numberToString = el => {
+    const numberToString = (el) => {
       const value = el.toString();
       if (value.length === 1) {
         return `0${value}`;
       }
       return value;
-    }
+    };
 
     const month = numberToString(data.month);
     const date = numberToString(dateNum);
     const fullDate = `${data.year}-${month}-${date}`;
 
     return fullDate;
-  }
+  };
 
   const prevMonth = () => {
     const data = calendarData;
@@ -124,7 +125,7 @@ const Calendar = props => {
 
     store.addLog(`[Calendar : To Prev Month] ${data.month}`);
     drawCalendar(data, prevDayFirst);
-  }
+  };
 
   const nextMonth = () => {
     const data = calendarData;
@@ -136,28 +137,28 @@ const Calendar = props => {
     }
 
     const dayFirst = dates.length % 7;
-    
+
     store.addLog(`[Calendar : To Next Month] ${data.month}`);
     drawCalendar(data, dayFirst);
-  }
+  };
 
-  const selectDay = fullDate => {
+  const selectDay = (fullDate) => {
     if (fullDate) {
       setSelectedDay(fullDate);
       store.addLog(`[Calendar : Select Day] ${fullDate}`);
     }
-  }
+  };
 
   const holidayCheck = (index) => {
     switch (index % 7) {
       case 0:
-        return 'sunday';
+        return "sunday";
       case 6:
-        return 'saturday';
+        return "saturday";
       default:
-        return '';
+        return "";
     }
-  }
+  };
 
   const renderCalendarDays = () => {
     return dayNames.map((dayName, index) => {
@@ -165,56 +166,58 @@ const Calendar = props => {
         <div className={`day-header ${holidayCheck(index)}`} key={index}>
           {dayName}
         </div>
-      )
-    })
-  }
+      );
+    });
+  };
 
   const renderCalendarDates = () => {
     return dates.map((data, index) => {
       return (
-        <DateItem data={data}
-                  key={index}
-                  holiday={holidayCheck(index)}
-                  selected={selectedDay === data.fullDate}
-                  onClick={() => {selectDay(data.fullDate)}}/>
-      )
-    })
-  }
+        <DateItem
+          data={data}
+          key={index}
+          holiday={holidayCheck(index)}
+          selected={selectedDay === data.fullDate}
+          onClick={() => {
+            selectDay(data.fullDate);
+          }}
+        />
+      );
+    });
+  };
 
   return (
     <div className="calendar-container">
       <div className="calendar-header">
         <button className="btn-prev-month" onClick={prevMonth}>
-          <IcArrow color="#999999"/>
+          <IcArrow color="#999999" />
         </button>
         <div className="month-info">
           {`${calendarData.year} . ${calendarData.month}`}
         </div>
         <button className="btn-next-month" onClick={nextMonth}>
-        <IcArrow color="#999999"/>
+          <IcArrow color="#999999" />
         </button>
       </div>
-      <div className="calendar-day">
-        {renderCalendarDays()}
-      </div>
-      <div className="calendar-body">
-        {renderCalendarDates()}
-      </div>
+      <div className="calendar-day">{renderCalendarDays()}</div>
+      <div className="calendar-body">{renderCalendarDates()}</div>
     </div>
-  )
-}
+  );
+};
 
-const DateItem = props => {
-  const holiday = props.holiday ? ` ${props.holiday}` : '';
-  const selected = props.selected ? ' selected' : '';
-  const blank = props.data.fullDate ? '' : ' blank';
+const DateItem = (props) => {
+  const holiday = props.holiday ? ` ${props.holiday}` : "";
+  const selected = props.selected ? " selected" : "";
+  const blank = props.data.fullDate ? "" : " blank";
 
   return (
-    <div className={`date-item${selected}${holiday}${blank}`}
-         onClick={props.onClick}>
+    <div
+      className={`date-item${selected}${holiday}${blank}`}
+      onClick={props.onClick}
+    >
       {props.data.date}
     </div>
-  )
-}
+  );
+};
 
 export default Calendar;
