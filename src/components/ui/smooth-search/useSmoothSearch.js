@@ -6,7 +6,7 @@ const useSmoothSearch = ({ store }) => {
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [initState, setInitState] = useState(true);
-  const searchInput = useRef();
+  const searchInputRef = useRef();
 
   const isActive = inputIsActive || !inputIsEmpty;
 
@@ -22,7 +22,7 @@ const useSmoothSearch = ({ store }) => {
   const clearInputValue = () => {
     store.addLog("[Search Input : Clear] Clear Search Input");
     updateInputValue({ target: { value: "" } });
-    searchInput.current.focus();
+    searchInputRef.current.focus();
   };
 
   const submit = async () => {
@@ -56,17 +56,17 @@ const useSmoothSearch = ({ store }) => {
   };
 
   return {
+    inputValue,
+    searchInputRef,
+    initState,
     isActive,
     inputIsEmpty,
-    initState,
-    clearInputValue,
-    enterSubmit,
-    searchInput,
-    inputValue,
-    updateInputValue,
-    onInputFocus,
-    submit,
     loadingState: store.loadingState,
+    submit,
+    enterSubmit,
+    onInputFocus,
+    clearInputValue,
+    updateInputValue,
   };
 };
 

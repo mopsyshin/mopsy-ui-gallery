@@ -7,9 +7,9 @@ export function generateID(prefix = "ui-id-") {
   return `${prefix}${idCounter}`;
 }
 
-export default function useId(givenId = undefined) {
+export default function useId(givenId) {
   const [id] = useState(() => {
-    return givenId ?? generateID();
+    return givenId || generateID();
   });
 
   return id;

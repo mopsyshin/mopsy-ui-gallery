@@ -6,30 +6,34 @@ import DummyList from "components/dummy-list/DummyList";
 import useSmoothSearch from "./useSmoothSearch";
 import { observer } from "mobx-react-lite";
 import { UiContext } from "stores";
+import classNames from "classnames/dedupe";
 
 const SmoothSearch = () => {
   const store = useContext(UiContext);
+
   const {
+    inputValue,
+    searchInputRef,
+    initState,
     isActive,
     inputIsEmpty,
-    initState,
-    clearInputValue,
-    enterSubmit,
-    searchInput,
-    inputValue,
-    updateInputValue,
-    onInputFocus,
-    submit,
     loadingState,
+    submit,
+    enterSubmit,
+    onInputFocus,
+    clearInputValue,
+    updateInputValue,
   } = useSmoothSearch({ store });
 
   return (
     <div className="smooth-search-page">
-      <div className={`search-input-container ${initState ? "init" : ""}`}>
-        <div className={`input-wrapper ${isActive ? "active" : ""}`}>
+      <div
+        className={classNames("search-input-container", { init: initState })}
+      >
+        <div className={classNames("input-wrapper", { active: isActive })}>
           <input
             type="text"
-            ref={searchInput}
+            ref={searchInputRef}
             value={inputValue}
             onChange={updateInputValue}
             onKeyPress={enterSubmit}
@@ -56,12 +60,12 @@ const SmoothSearch = () => {
 
 const SubmitButton = ({ submit, disabled, isLoading }) => (
   <button disabled={disabled} onClick={submit} className="btn-submit">
-    <div className={`spinner-wrapper ${isLoading ? "active" : ""}`}>
+    <div className={classNames("spinner-wrapper", { active: isLoading })}>
       <div className="spinner">
         <Spinner />
       </div>
     </div>
-    <div className={`text ${isLoading ? "" : "active"}`}>Search</div>
+    <div className={classNames("text", { active: isLoading })}>Search</div>
   </button>
 );
 
