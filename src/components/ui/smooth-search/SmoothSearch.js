@@ -65,17 +65,12 @@ const SubmitButton = ({ submit, disabled, isLoading }) => (
         <Spinner />
       </div>
     </div>
-    <div className={classNames("text", { active: isLoading })}>Search</div>
+    <div className={classNames("text", { active: !isLoading })}>Search</div>
   </button>
 );
 
 const ClearButton = ({ clear }) => (
-  <button
-    className="btn-clear"
-    onClick={() => {
-      clear();
-    }}
-  >
+  <button className="btn-clear" onClick={() => clear()}>
     <IcRemove color="#ffffff" />
   </button>
 );

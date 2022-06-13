@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import "./SimpleTab.scss";
 import tabs from "./tab.config";
 import UiContext from "stores/UiContext";
@@ -14,8 +14,8 @@ const SimpleTab = () => {
   return (
     <div className="simple-tab-container">
       <div className="tab-header" ref={tabWrapperRef}>
-        {tabMenus.map((tab, index) => (
-          <TabItem data={tab} key={index} onClick={selectTab} />
+        {tabMenus.map((tab) => (
+          <TabItem data={tab} key={tab.tabName} onClick={selectTab} />
         ))}
         <div
           className="tab-indicator"
@@ -33,18 +33,18 @@ const SimpleTab = () => {
   );
 };
 
-const TabItem = ({ onClick, data }) => (
+const TabItem = memo(({ onClick, data }) => (
   <div className={`tab-item ${data.path}`} onClick={() => onClick(data)}>
     {data.tabName}
   </div>
-);
+));
 
-const TabPage = ({ data }) => (
+const TabPage = memo(({ data }) => (
   <div className="tab-page">
     <div className="content" style={{ backgroundColor: data.color }}>
       {data.tabName}
     </div>
   </div>
-);
+));
 
 export default observer(SimpleTab);
