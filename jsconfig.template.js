@@ -1,11 +1,11 @@
 module.exports = {
-  baseUrl: 'src',
-  include: ['src/**/*', 'tests/**/*'],
+  baseUrl: "src",
+  include: ["src/**/*", "tests/**/*"],
   compilerOptions: {
-    baseUrl: 'src',
-    target: 'es6',
-    module: 'es6',
+    baseUrl: "src",
+    target: "es6",
+    module: "es6",
     experimentalDecorators: true,
   },
-  exclude: ["node_modules"]
-}
+  exclude: ["node_modules"],
+};

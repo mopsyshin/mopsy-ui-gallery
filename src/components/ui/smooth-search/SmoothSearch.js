@@ -1,115 +1,79 @@
-import React, { useState, useContext } from 'react';
-import { observer } from 'mobx-react-lite';
-import { UiContext } from 'stores';
-import './SmoothSearch.scss';
-import IcRemove from 'assets/IcRemove';
-import Spinner from 'assets/Spinner';
-import DummyList from 'components/dummy-list/DummyList';
+import React, { useContext } from "react";
+import "./SmoothSearch.scss";
+import IcRemove from "assets/IcRemove";
+import Spinner from "assets/Spinner";
+import DummyList from "components/dummy-list/DummyList";
+import useSmoothSearch from "./useSmoothSearch";
+import { observer } from "mobx-react-lite";
+import { UiContext } from "stores";
 
-const SmoothSearch = props => {
+const SmoothSearch = () => {
   const store = useContext(UiContext);
-  const [inputIsActive, setInputIsActive] = useState(false);
-  const [inputIsEmpty, setInputIsEmpty] = useState(true);
-  const [inputValue, setInputValue] = useState("");
-  const [initState, setInitState] = useState(true);
-  const [count, setCount] = useState(1);
-  let searchInput;
-
-  const updateInputValue = e => {
-    setInputValue(e.target.value);
-    if (e.target.value === "") {
-      setInputIsEmpty(true);
-    } else {
-      setInputIsEmpty(false);
-    }
-  };
-
-  const clearInputValue = () => {
-    store.addLog('[Search Input : Clear] Clear Search Input');
-    updateInputValue({target: {value: ''}});
-    searchInput.focus();
-  }
-
-  const submit = async () => {
-    if (!inputIsEmpty && !store.loadingState) {
-      setInitState(false);
-      store.setSearchingValue(inputValue);
-      store.addLog(`[Search Input : Search] ${inputValue}`);
-      store.addToast({
-        id: count,
-        message: `Searching ${inputValue}...`,
-      });
-      setCount(count + 1);
-      const result = await store.getDummyData();
-      store.addLog(result);
-    }
-  };
-
-  const enterSubmit = e => {
-    if (e.key === 'Enter') {
-      submit();
-    }
-  }
-
-  const renderSubmitButton = () => {
-    if (inputIsActive || !inputIsEmpty) {
-      return (
-        <button disabled={inputIsEmpty} onClick={submit} className="btn-submit">
-          <div className={`spinner-wrapper ${store.loadingState ? 'active' : ''}`}>
-            <div className="spinner"><Spinner/></div>
-          </div>
-          <div className={`text ${store.loadingState ? '' : 'active'}`}>Search</div>
-        </button>
-      );
-    }
-  };
-
-  const renderClearButton = () => {
-    if (!inputIsEmpty) {
-      return (
-        <button
-          className="btn-clear"
-          onClick={() => {
-            clearInputValue();
-          }}>
-          <IcRemove color="#ffffff" />
-        </button>
-      );
-    }
-  };
+  const {
+    isActive,
+    inputIsEmpty,
+    initState,
+    clearInputValue,
+    enterSubmit,
+    searchInput,
+    inputValue,
+    updateInputValue,
+    onInputFocus,
+    submit,
+    loadingState,
+  } = useSmoothSearch({ store });
 
   return (
     <div className="smooth-search-page">
-      <div className={`search-input-container ${initState ? 'init' : ''}`}>
-        <div
-          className={`input-wrapper ${
-            inputIsActive || !inputIsEmpty ? "active" : ""
-          }`}
-        >
+      <div className={`search-input-container ${initState ? "init" : ""}`}>
+        <div className={`input-wrapper ${isActive ? "active" : ""}`}>
           <input
             type="text"
-            ref={ref => searchInput = ref}
+            ref={searchInput}
             value={inputValue}
             onChange={updateInputValue}
             onKeyPress={enterSubmit}
             placeholder="Type Something"
-            onFocus={() => {
-              setInputIsActive(true)
-              store.addLog('[Search Input : Focus] true')
-            }}
-            onBlur={() => {
-              setInputIsActive(false)
-              store.addLog('[Search Input : Blur] true')
-            }}/>
-          {renderClearButton()}
+            onFocus={() => onInputFocus(true)}
+            onBlur={() => onInputFocus(false)}
+          />
+          {!inputIsEmpty && <ClearButton clear={clearInputValue} />}
         </div>
-        {renderSubmitButton()}
+        {isActive && (
+          <SubmitButton
+            submit={submit}
+            disabled={inputIsEmpty}
+            isLoading={loadingState}
+          />
+        )}
       </div>
       <div className="search-result-container">
-        <DummyList initState={initState}/>
+        <DummyList initState={initState} />
       </div>
     </div>
   );
 };
+
+const SubmitButton = ({ submit, disabled, isLoading }) => (
+  <button disabled={disabled} onClick={submit} className="btn-submit">
+    <div className={`spinner-wrapper ${isLoading ? "active" : ""}`}>
+      <div className="spinner">
+        <Spinner />
+      </div>
+    </div>
+    <div className={`text ${isLoading ? "" : "active"}`}>Search</div>
+  </button>
+);
+
+const ClearButton = ({ clear }) => (
+  <button
+    className="btn-clear"
+    onClick={() => {
+      clear();
+    }}
+  >
+    <IcRemove color="#ffffff" />
+  </button>
+);
 
 export default observer(SmoothSearch);

@@ -1,6 +1,6 @@
-import { observable, action } from 'mobx';
-import { createContext } from 'react';
-import dummyData from '../dummy/dummyListSample';
+import { observable, action } from "mobx";
+import { createContext } from "react";
+import dummyData from "../dummy/dummyListSample";
 
 class UiStore {
   @observable
@@ -13,15 +13,15 @@ class UiStore {
   toast = [];
 
   @observable
-  logs = ['[Action Log] Action Log Display Mounted'];
+  logs = ["[Action Log] Action Log Display Mounted"];
 
   @observable
   loadingState = false;
 
   @observable
-  searchingValue = '';
-	
-  @action 
+  searchingValue = "";
+
+  @action
   addToast(toastItem) {
     this.toast.push(toastItem);
     this.addLog(`[Toast : addToast] ${toastItem.message}`);
@@ -39,7 +39,7 @@ class UiStore {
 
   @action
   clearLog() {
-    this.logs = ['[Action Log] Clear Logs'];
+    this.logs = ["[Action Log] Clear Logs"];
   }
 
   @action
@@ -49,7 +49,7 @@ class UiStore {
 
   @action
   setSearchingValue(value) {
-    this.searchingValue = value; 
+    this.searchingValue = value;
   }
 
   @action
@@ -64,7 +64,7 @@ class UiStore {
 
   @action
   getDummyData() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.loadingState = true;
       this.dummyList = [];
       setTimeout(() => {
@@ -80,9 +80,9 @@ class UiStore {
             clearInterval(timer);
           }
         }, 100);
-        resolve('success');
+        resolve("success");
       }, 1000);
-    })
+    });
   }
 }
 
