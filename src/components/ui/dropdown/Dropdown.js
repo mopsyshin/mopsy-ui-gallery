@@ -25,7 +25,7 @@ const Dropdown = () => {
         <div
           className={classNames("scroll-view", { selecting })}
           style={{
-            height: wrapperHeight(),
+            height: wrapperHeight,
           }}
         >
           <div className="display-item" onClick={toggleDropdown}>

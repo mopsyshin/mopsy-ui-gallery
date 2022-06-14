@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import data from "../../../dummy/dropdownSample";
 
 const useDropdown = ({ store }) => {
@@ -41,14 +41,15 @@ const useDropdown = ({ store }) => {
     }
   }, [selectItem]);
 
-  const wrapperHeight = () => {
+  const wrapperHeight = useMemo(() => {
     if (selecting) {
       return data.arr.length > 5
         ? 56 * 5 + 28 + "px"
         : 56 * (data.arr.length + 1) + "px";
     }
     return "56px";
-  };
+  }, [selecting]);
+
   return {
     selecting,
     wrapperHeight,
